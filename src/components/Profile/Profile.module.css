@@ -1,0 +1,11 @@
+.content {
+    grid-area: c;
+    background-color: powderblue;
+}
+
+.mainPic {
+    max-width: 100%;
+    margin: 0 0 10px 0;
+}
+
+
