@@ -1,0 +1,35 @@
+.friendsItemsWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+
+}
+
+.friendsWrapper{
+    margin: 100px 0 0 0;
+    
+}
+
+.friendsTitle{
+    font-size: 30px;
+    color: #fff;
+}
+
+.friendsWrapper img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.friendItems{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.friendItem{
+  padding: 5px;
+  color: #fff;
+    
+}
