@@ -12,7 +12,7 @@ const Profile = (props) => {
         <img className={classes.mainPic} src='https://www.istockphoto.com/resources/images/HomePage/Hero/682374404.jpg' />
       </div>
       <ProfileInfo />
-      <MyPosts postsData={props.state.postsData} />
+      <MyPosts postsData={props.state.postsData} addPost={props.addPost} />
     </div>
   );
 }

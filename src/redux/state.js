@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 let state = {
   profilePage: {
     postsData: [
@@ -11,7 +13,7 @@ let state = {
     friendsData: [
       { id: 1, name: 'Ross', img:'https://cdn4.vectorstock.com/i/1000x1000/84/68/hipster-man-in-glasses-avatar-profile-userpic-on-vector-8988468.jpg' },
       { id: 2, name: 'Rachel', img:'https://t3.ftcdn.net/jpg/04/10/08/16/360_F_410081697_B14LdyUz9N5v7dYYk7ttyC8P0PwOkDxm.jpg' },
-      { id: 3, name: 'Monica', img:'https://image.shutterstock.com/image-vector/waitress-chef-glasses-apron-userpic-260nw-1956369484.jpg' }
+      { id: 3, name: 'Monica', img: 'https://image.shutterstock.com/image-vector/waitress-chef-glasses-apron-userpic-260nw-1956369484.jpg' },
     ]
   },
   dialogsPage: {
@@ -33,6 +35,27 @@ let state = {
     ]
   }
 };
+
+export let addPost = (postText) => {
+ 
+  let newPost = {
+    id: 5,
+    message: postText,
+    likesCounter: 0
+  };
+  state.profilePage.postsData.push(newPost);
+  rerenderEntireTree(state);
+}
+
+export let sendMessage = (messageText) => {
+  let newMessage = {
+    id: 7,
+    text: messageText
+  };
+  state.dialogsPage.messagesData.push(newMessage);
+  rerenderEntireTree(state);
+}
+
 
 export default state;
 

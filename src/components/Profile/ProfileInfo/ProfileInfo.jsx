@@ -7,7 +7,7 @@ const ProfileInfo = () => {
   return (
     <div>
       <div>
-        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" />
+        <img className={classes.userPic} src="https://www.byrdie.com/thmb/kAXw1ZXSfixyaiIjLt0tVfRzhhs=/843x1024/filters:fill(auto,1)/GettyImages-1035308964-5d15a77127854247b5c841d339a546c0.jpeg" />
       </div>
       <div className={classes.description}>
         USERPIC + DESCRIPTION
