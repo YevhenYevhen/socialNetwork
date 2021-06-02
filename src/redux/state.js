@@ -1,61 +1,80 @@
-import { rerenderEntireTree } from "../render";
 
-let state = {
-  profilePage: {
-    postsData: [
-      { id: 1, message: 'Hey, how are you?', likesCounter: 12 },
-      { id: 2, message: 'This is my first post!', likesCounter: 34 },
-      { id: 3, message: '', likesCounter: 0 },
-      { id: 4, message: '', likesCounter: 0 },
-      { id: 5, message: '', likesCounter: 0 },
-      { id: 6, message: '', likesCounter: 0 }
-    ],
-    friendsData: [
-      { id: 1, name: 'Ross', img:'https://cdn4.vectorstock.com/i/1000x1000/84/68/hipster-man-in-glasses-avatar-profile-userpic-on-vector-8988468.jpg' },
-      { id: 2, name: 'Rachel', img:'https://t3.ftcdn.net/jpg/04/10/08/16/360_F_410081697_B14LdyUz9N5v7dYYk7ttyC8P0PwOkDxm.jpg' },
-      { id: 3, name: 'Monica', img: 'https://image.shutterstock.com/image-vector/waitress-chef-glasses-apron-userpic-260nw-1956369484.jpg' },
-    ]
+let store = {
+  _state: {
+
+    profilePage: {
+      postsData: [
+        { id: 1, message: 'This is my first post!', likesCounter: 12 },
+        { id: 2, message: 'This is crazy!', likesCounter: 34 },
+        { id: 6, message: 'I am so excited', likesCounter: 0 }
+      ],
+      newPostData: '',
+      friendsData: [
+        { id: 1, name: 'Ross', img:'https://www.thesun.co.uk/wp-content/uploads/2017/08/nintchdbpict000003441959.jpg' },
+        { id: 2, name: 'Rachel', img:'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTcxNDEzMTU5NzM3ODI5MzU4/rachel-haircut-gettyimages-138427199.jpg' },
+        { id: 3, name: 'Monica', img: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/happy_birthday_courteney_cox_10_dialogues_of_monica_geller_that_friends_fan_can_never_get_enough_of.jpg' },
+      ]
+    },
+    dialogsPage: {
+      messagesData: [
+        { id: 1, text: 'Hey!' },
+        { id: 2, text: 'Call me!' },
+        { id: 3, text: 'what???' },
+        { id: 4, text: 'where are you?' },
+        { id: 5, text: 'hi there' },
+        { id: 6, text: 'how you doin?' }
+      ],
+      newMessageData: '',
+      dialogsData: [
+        { id: 1, name: 'Ross' },
+        { id: 2, name: 'Rachel' },
+        { id: 3, name: 'Chandler' },
+        { id: 4, name: 'Monica' },
+        { id: 5, name: 'Phoebe' },
+        { id: 6, name: 'Joey' }
+      ]
+    }
   },
-  dialogsPage: {
-    messagesData: [
-      { id: 1, text: 'Hey!' },
-      { id: 2, text: 'Call me!' },
-      { id: 3, text: 'what???' },
-      { id: 4, text: 'where are you?' },
-      { id: 5, text: 'hi there' },
-      { id: 6, text: 'how you doin?' }
-    ],
-    dialogsData: [
-      { id: 1, name: 'Ross' },
-      { id: 2, name: 'Rachel' },
-      { id: 3, name: 'Chandler' },
-      { id: 4, name: 'Monica' },
-      { id: 5, name: 'Phoebe' },
-      { id: 6, name: 'Joey' }
-    ]
-  }
-};
+  getState() {
+    return this._state;
+  },
+  _callSubscriber() {
+    console.log('state is changed');
+  },
+  addPost() {
 
-export let addPost = (postText) => {
- 
   let newPost = {
     id: 5,
-    message: postText,
+    message: this._state.profilePage.newPostData,
     likesCounter: 0
   };
-  state.profilePage.postsData.push(newPost);
-  rerenderEntireTree(state);
+  this._state.profilePage.postsData.push(newPost);
+  this._state.profilePage.newPostData = '';
+  this._callSubscriber(this._state);
+  },
+  updateNewPostData(currentText) {
+    this._state.profilePage.newPostData = currentText;
+    this._callSubscriber(this._state);
+
+  },
+  updateNewMessageData(currentMessage) {
+    this._state.dialogsPage.newMessageData = currentMessage;
+    this._callSubscriber(this._state);
+  },
+  sendMessage(messageText) {
+    let newMessage = {
+      id: 7,
+      text: messageText
+    };
+    this._state.dialogsPage.messagesData.push(newMessage);
+    this._state.dialogsPage.newMessageData = '';
+    this._callSubscriber(this._state);
+  },
+  subscribe(observer) {
+    this._callSubscriber = observer; // PATTERN OBSERVER // PUBLISHER-SUBSCRIBER //READ ABOUT IT 
+  }
 }
 
-export let sendMessage = (messageText) => {
-  let newMessage = {
-    id: 7,
-    text: messageText
-  };
-  state.dialogsPage.messagesData.push(newMessage);
-  rerenderEntireTree(state);
-}
-
-
-export default state;
+window.store = store;
+export default store;
 

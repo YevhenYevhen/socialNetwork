@@ -1,13 +1,30 @@
 
+import store from './redux/state';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state';
-import { rerenderEntireTree } from './render';
 
 
-rerenderEntireTree(state);
+export let rerenderEntireTree = (state) => {
+  ReactDOM.render(
+    <React.StrictMode>
+          <App state={state}
+              addPost={store.addPost.bind(store)}
+              sendMessage={store.sendMessage.bind(store)}
+              updateNewPostData={store.updateNewPostData.bind(store)}
+              updateNewMessageData={store.updateNewMessageData.bind(store)} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+};
 
 
+
+rerenderEntireTree(store.getState());
+
+store.subscribe(rerenderEntireTree);
 
 
 

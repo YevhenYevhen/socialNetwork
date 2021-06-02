@@ -4,7 +4,8 @@
 }
 
 .mainPic {
-    max-width: 100%;
+    width: 100%;
+    max-height: 400px;
     margin: 0 0 10px 0;
 }
 

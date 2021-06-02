@@ -7,21 +7,26 @@ import Post from './Post/Post.jsx';
 const MyPosts = (props) => {
 
 
-  
   let postsElements = props.postsData.map((post) => <Post message={post.message} likes={post.likesCounter} />);
+  
 
   let newPostElement = React.createRef();
   let addPost = () => {
-    let text = newPostElement.current.value;
-    props.addPost(text);
-    newPostElement.current.value = '';
+    props.addPost();
   }
+
+  let onPostChange = () => {
+    let text = newPostElement.current.value;
+    props.updateNewPostData(text);
+    
+}
+
   return (<div className={classes.postsBlock}>
     <div>
       <h2>My posts</h2>
        <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea value={props.newPostData} onChange={onPostChange} ref={newPostElement} name="" id="" cols="111" rows="5" />
         </div>
         <div>
           <button onClick={addPost} >Add post</button>
@@ -29,7 +34,7 @@ const MyPosts = (props) => {
       </div>
     </div>
     <div className={classes.posts}>
-      { postsElements }
+      { postsElements.reverse() }
     </div>
   </div>
   );

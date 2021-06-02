@@ -9,10 +9,10 @@ const Profile = (props) => {
   return (
     <div className={classes.content}> {/*-----this class as deleted because we added app-wrapper-content*/}
       <div>
-        <img className={classes.mainPic} src='https://www.istockphoto.com/resources/images/HomePage/Hero/682374404.jpg' />
+        <img className={classes.mainPic} src='https://www.artmajeur.com/medias/hd/n/o/nottrott/artwork/10805254_large-abstract-painting-958.jpg' />
       </div>
       <ProfileInfo />
-      <MyPosts postsData={props.state.postsData} addPost={props.addPost} />
+      <MyPosts postsData={props.profilePage.postsData} addPost={props.addPost} newPostData={props.profilePage.newPostData} updateNewPostData={props.updateNewPostData} />
     </div>
   );
 }

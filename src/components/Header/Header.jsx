@@ -2,7 +2,8 @@ import React from 'react';
 import classes from './Header.module.css';
 const Header = () => {
     return (<header className={classes.header}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png" />
+        <img src="https://symbolikon.com/wp-content/uploads/edd/2019/09/Alchemy-water-bold-400w.png" />
+            <span className={classes.triangle}>Triangle</span> 
     </header>
     );
 }
