@@ -3,7 +3,7 @@ import Friend from './Friend/Friend';
 
 
 const Friends = (props) => {
-
+   
     return (
         <div className={classes.friendsWrapper}>
             <div className={classes.friendsTitle}>Friends</div>

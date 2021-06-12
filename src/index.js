@@ -1,31 +1,36 @@
 
-import store from './redux/state';
+import store from './redux/reduxStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 
-export let rerenderEntireTree = (state) => {
+//export let rerenderEntireTree = (state) => {
   ReactDOM.render(
-    <React.StrictMode>
-          <App state={state}
-              addPost={store.addPost.bind(store)}
-              sendMessage={store.sendMessage.bind(store)}
-              updateNewPostData={store.updateNewPostData.bind(store)}
-              updateNewMessageData={store.updateNewMessageData.bind(store)} />
-    </React.StrictMode>,
+    //<React.StrictMode> TOOK THIS ONE AWAY BECAUSE THERE WERE 8 USERS INSTEAD OF 4 FOR SOME REASON
+      <BrowserRouter>
+        <Provider store={store}>
+          <App /* store={store}  // state={state} dispatch={store.dispatch.bind(store)} */ />
+          </Provider>
+    </BrowserRouter>,
+    //</React.StrictMode>,
     document.getElementById('root')
   );
-};
+//};
 
+window.store = store;
 
+//rerenderEntireTree(store.getState());
 
-rerenderEntireTree(store.getState());
-
-store.subscribe(rerenderEntireTree);
-
+/* store.subscribe(() => {
+  let state = store.getState();
+  rerenderEntireTree(state);
+});
+ */
 
 
 
