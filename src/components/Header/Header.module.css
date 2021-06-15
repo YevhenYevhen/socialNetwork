@@ -16,3 +16,10 @@
   font-weight: 700;
 }
 
+.loginBlock{
+  float: right;
+  padding: 20px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+}

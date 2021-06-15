@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, setUsersAC, unfollowAC, setCurrentPageAC, setTotalUsersCountAC, toggleIsFetchingAC} from '../../redux/usersReducer';
+import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching } from '../../redux/usersReducer';
 import Users from './Users';
 import * as axios from 'axios';
 import Preloader from '../Common/Preloader';
@@ -60,7 +60,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
+/* let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
             dispatch(followAC(userId))
@@ -81,6 +81,29 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(toggleIsFetchingAC(isFetching))
         }
     }
-}
+} */
 
-export default connect (mapStateToProps, mapDispatchToProps) (UsersContainer);
+/*=================================================================================*/
+// CODE REFACTORING. YOU DON'T HAVE TO DISPATCH MANUALLY, REDUX CAN DO THAT FOR YOU
+/*=================================================================================*/
+
+/* export default connect(mapStateToProps, {
+    mapDispfollow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setTotalUsersCountAC,
+    toggleIsFetching: toggleIsFetchingAC
+})(UsersContainer); */
+
+/*=================================================================================*/
+// CODE REFACTORING. IF THE PROPERTY AND THE VALUE HAVE THE SAME NAME, YOU DON'T 
+// HAVE TO HAVE IT AS IT IS ABOVE, BUT SHORTEN IT AS IT IS BELOW. 
+/*=================================================================================*/
+
+
+
+export default connect(mapStateToProps,
+    { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching })(UsersContainer);
+
+

@@ -13,7 +13,7 @@ const Profile = (props) => {
       <div>
         <img className={classes.mainPic} src='https://www.artmajeur.com/medias/hd/n/o/nottrott/artwork/10805254_large-abstract-painting-958.jpg' />
       </div>
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile} />
       <MyPostsContainer /* store={props.store}  *//>
     </div>
   );

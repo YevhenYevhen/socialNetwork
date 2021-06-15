@@ -1,4 +1,4 @@
-.description{
+.fullName{
     padding: 10px;
     font-size: 40px;
     text-transform: uppercase;
@@ -8,4 +8,36 @@
 .userPic{
     max-height: 300px;
     padding: 10px;
+}
+
+.aboutMe{
+    font-size: 20px;
+    color: rgba(0, 0, 247, 0.507);
+    font-style: italic;
+    padding: 0 0 0 10px;
+   
+}
+
+.profileInfoWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+
+.social{
+    width: 200px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.contacts{
+    padding: 30px 0 0 0;
+    display: flex;   
+}
+
+.links{ 
+    width: 300px;
+    font-size: 25px;
+    
 }
