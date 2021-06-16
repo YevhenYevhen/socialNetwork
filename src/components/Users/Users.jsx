@@ -2,6 +2,8 @@ import React from 'react';
 import classes from './Users.module.css';
 import userpic from '../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
+import { usersAPI } from '../../Api/api';
+
 
 let Users = (props) => {
     
@@ -21,11 +23,29 @@ let Users = (props) => {
                             <img className={classes.userpic} src={u.photos.small != null ? u.photos.small : userpic} alt="" />
                         </NavLink>
                        
-                        <div>
+                      {  <div>
                             {u.followed
-                                ? <button className={classes.follow} onClick={() => { props.follow(u.id) }}>Unfollow</button>
-                                : <button className={classes.follow} onClick={() => { props.unfollow(u.id) }}>Follow</button>}
-                        </div>
+                                ? <button className={classes.follow} onClick={() => {
+                                    usersAPI.unfollow(u.id)
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.unfollow(u.id)
+                                        }
+                                    })
+
+                                }}>Unfollow</button>
+
+                                : <button className={classes.follow} onClick={() => {
+                                    usersAPI.follow(u.id)
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.follow(u.id)
+                                        }
+                                    })
+
+
+                                }}>Follow</button>}
+                        </div>}
                     </div>
                     <div className={classes.borderWrapper}>
                         <div>

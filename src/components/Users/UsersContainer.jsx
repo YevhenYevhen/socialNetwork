@@ -4,6 +4,7 @@ import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleI
 import Users from './Users';
 import * as axios from 'axios';
 import Preloader from '../Common/Preloader';
+import { usersAPI }   from '../../Api/api';
 
 
 
@@ -13,21 +14,21 @@ class UsersContainer extends React.Component {
             super(props); 
         } */
     componentDidMount() {
-            this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+
+
+        usersAPI.getUsers(this.props.CurrentPage, this.props.pageSize ).then(response => {
                 this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.setUsers(response.items)
+                this.props.setTotalUsersCount(response.totalCount);
             })
-        }
+    }
+    
     onPageChanged = (currentPage) => {
         this.props.setCurrentPage(currentPage);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(currentPage, this.props.pageSize ).then(response => {
                 this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(response.items);
                 
             })
         }
