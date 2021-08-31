@@ -1,25 +1,46 @@
 .header {
   grid-area: h;
-  background-color: rgba(47, 92, 92, 0.76);
-  
+  background-color: rgb(2, 63, 155);
+  display: flex;
+  align-items: center;
+  font-family: 'Helvetica', Arial, Helvetica, sans-serif;
+  justify-content: space-between;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
 }
 
-.header img {
+.logo {
   width: 60px;
   height: 60px;
-  padding: 10px 0 0 0;
 }
 
-.triangle{
+.title{
   font-size: 50px;
-  font-family: 'Helvetica', Arial, Helvetica, sans-serif;
-  font-weight: 700;
+  color: #fff;
+  font-weight: 400;
 }
 
 .loginBlock{
-  float: right;
-  padding: 20px;
   font-size: 20px;
   color: #fff;
   text-decoration: none;
+  padding: 0 5px 0 5px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  padding: 0 5px 0 5px;
+}
+
+.userIcon{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0 5px 0 5px;
+}
+
+.logoBox{
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: row;
 }

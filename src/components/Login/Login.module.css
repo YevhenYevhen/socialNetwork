@@ -1,0 +1,33 @@
+.wrapper{
+max-width: 400px;
+min-height: 300px;
+border: 2px solid black;
+margin: 100px auto;
+color: blue;
+border: 2px solid blue;
+}
+
+.field{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-direction: column;
+    }
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+   
+
+    
+}
+
+.submitButton{
+    width: 100px;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.error{
+    color: red;
+}

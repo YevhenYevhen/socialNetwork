@@ -1,16 +1,18 @@
+.nav {
+  grid-area: n;
+  background-color: #fff;
+  padding: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 90px;
+  max-height: 83vh;
+}
 
-
-.nav{
-    grid-area: n;
-    background-color:#add8e6;
-    padding: 20px;
-  }
-
-.item a{
-    color: #fff;
-    text-decoration: none;
+.item a {
+  color: #000;
+  text-decoration: none;
 }
 
 .item a.activeLink {
-color: darkblue;
+  color: darkblue;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 //import { updateNewMessageData } from '../../redux/state';
 import { onMessageChangeActionCreator, sendMessageActionCreator } from './../../redux/dialogsReducer';
+import MessageInputContainer from './MessageInput';
 
 
 
@@ -22,25 +23,33 @@ const Dialogs = (props) => {
 
 
     }
-    let onMessageChange = () => {
+   /*  let onMessageChange = () => {
         let messageText = newMessageElement.current.value;
         props.updateNewMessageData(messageText);
-       /*  props.dispatch(onMessageChangeActionCreator(messageText)); */
+         props.dispatch(onMessageChangeActionCreator(messageText)); 
     }
+ */
 
+   /*  if (!props.isAuth) return <Redirect to={'/login'} />
+ */
     return (
+         
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
                 {dialogsElements}
             </div>
             <div className={classes.messages}>
                 {messagesElements}
-                <textarea placeholder='Enter your message' value={newMessageData} onChange={onMessageChange} ref={newMessageElement} className={classes.messageInputArea}></textarea>
-                <div>
-                    <button onClick={sendMessage}>Send</button></div>
+               {/*  <textarea placeholder='Enter your message' value={newMessageData} onChange={onMessageChange} ref={newMessageElement} className={classes.messageInputArea}></textarea> */}
+                <div><MessageInputContainer sendMessage={props.sendMessage} /></div>
+{/*                 <div>
+                    <button onClick={sendMessage}>Send</button>
+                </div> */}
             </div>
         </div>
     )
 }
+
+
 
 export default Dialogs;

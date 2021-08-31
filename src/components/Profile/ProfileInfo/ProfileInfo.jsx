@@ -1,75 +1,76 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css';
 import Preloader from '../../Common/Preloader';
-
-
+import ProfileStatusWithHooks from './../ProfileStatusWithHooks';
+import userPic from './../../../assets/images/user.png'
+import { useEffect } from 'react';
+import ProfileDataForm from '../ProfileDataForm';
+import updateIcon from './../../../assets/images/update-icon.png';
+import { span } from 'prelude-ls';
 
 const ProfileInfo = (props) => {
+
+
+  let [editMode, setEditMode] = useState(false);
+  let [updatePictureMode, setUpdatePictureMode] = useState(false);
 
   if (!props.profile) {
     return <Preloader />
   }
 
+  const onMainPicSelected = (e) => {
+    if (e.target.files.length) {
+      props.saveNewMainPic(e.target.files[0])
+    }
+  }
+
+  const onMouseDownCapture = (e) => {
+    setUpdatePictureMode(true);
+  }
+  const onMouseLeave = (e) => {
+    setUpdatePictureMode(false);
+  }
   return (
     <div className={classes.profileInfoWrapper}>
       <div className={classes.pictureNameStatus}>
-        <img className={classes.userPic} src={props.profile.photos.large} />
+        <div onMouseLeave={onMouseLeave} onMouseDownCapture={onMouseDownCapture}> 
+        <img className={classes.userPic} src={props.profile.photos.large || userPic} />
+          {props.isOwner && updatePictureMode && <div><input className={classes.updateUserPicButton} type="file"
+            onChange={onMainPicSelected}></input></div>}
+        </div>
         <div className={classes.fullName}>
           {props.profile.fullName}
         </div>
-        <div className={classes.aboutMe}>
-          {props.profile.aboutMe}
+        <div>
+          <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
         </div>
       </div>
-      <div className={classes.contacts}>
-        <div className={classes.social}>
-          <div> {props.profile.contacts.facebook && 'Facebook:'} </div>
-          <div>{props.profile.contacts.website && 'Website:'}</div>
-          <div>{props.profile.contacts.vk && 'VK:' } </div>
-          <div>{props.profile.contacts.twitter && 'Twitter:'}</div>
-          <div>{props.profile.contacts.instagram && 'Instagram: '}</div>
-          <div>{props.profile.contacts.youtube && 'Youtube:'} </div>
-          <div>{props.profile.contacts.github && 'GitHub: '}</div>
-        </div>
-        <div className={classes.links}>
-          <div> {props.profile.contacts.facebook || null}</div>
-          <div> {props.profile.contacts.website || null}</div>
-          <div> {props.profile.contacts.vk || null}</div>
-          <div> {props.profile.contacts.twitter || null}</div>
-          <div>{props.profile.contacts.instagram || null}</div>
-          <div> {props.profile.contacts.youtube || null}</div>
-          <div>{props.profile.contacts.github || null}</div>
-          <div>{props.profile.contacts.null}</div>
-        </div>
-      </div>
+      {editMode ? <ProfileDataForm initialValues={props.profile} profile={props.profile} saveProfile={props.saveProfile} deactivateEditMode={() => {setEditMode(false)}} /> :
+        <ProfileData profile={props.profile} isOwner={props.isOwner} activateEditMode={() => {setEditMode(true)}}  />}
     </div>
-
-
-
-
-    /*     <div className={classes.profileInfoWrapper}>
-          <div className={classes.userPicAndName}>
-            <img className={classes.userPic} src={props.profile.photos.large} />
-            <div className={classes.fullName}>
-              {props.profile.fullName}
-              <div className={classes.aboutMe}>
-                {props.profile.aboutMe}
-              </div>
-            </div>
-          </div>
-          <div className={classes.contacts}>
-            <div>{props.profile.contacts.facebook}</div>
-            <div>{props.profile.contacts.website}</div>
-            <div>{props.profile.contacts.vk}</div>
-            <div>{props.profile.contacts.twitter}</div>
-            <div>{props.profile.contacts.instagram}</div>
-            <div>{props.profile.contacts.youtube}</div>
-            <div>{props.profile.contacts.github}</div>
-            <div>{props.profile.contacts.null}</div>
-          </div>
-          <div className={classes.job}>{props.profile.lookingForAJob ? 'I am looking for a job' : null} <div>{props.profile.lookingForAJobDescription}</div></div>
-        </div>*/
   )
 }
+
+
+const Contact = ({ contactsTitle, contactsValue }) => {
+  return <div>{contactsTitle}:{contactsValue}</div>;
+}
+
+const ProfileData = ({ profile, isOwner, activateEditMode }) => {
+  return <div>
+    {isOwner && <div><button onClick={activateEditMode}>Edit</button></div>}
+    <div className={classes.aboutMe}>
+    {profile.aboutMe}
+  </div>
+    <div className='contacts'>
+      <div>Contacts:{Object.keys(profile.contacts).map(key => {
+        return <Contact key={key} contactsTitle={key} contactsValue={profile.contacts[key]} />
+      })}</div>
+    </div>
+  </div>
+}
+
+
+
 
 export default ProfileInfo;

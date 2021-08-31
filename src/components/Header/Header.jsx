@@ -1,13 +1,23 @@
 import React from 'react';
 import classes from './Header.module.css';
 import { NavLink } from 'react-router-dom';
+import logo from './../../assets/images/logo.png'
+import userPic from './../../assets/images/user.png'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Preloader from '../Common/Preloader';
 const Header = (props) => {
+    if (!props.profile) return <Preloader />
     return (<header className={classes.header}>
-        <img src="https://symbolikon.com/wp-content/uploads/edd/2019/09/Alchemy-water-bold-400w.png" />
-        <span className={classes.triangle}>Triangle</span>
-        
-        <div className={classes.loginBlock}>
-            {props.isAuth ? props.login :  <NavLink to={'/login'}>Login</NavLink> }
+        <div className={classes.logoBox}>
+            <img className={classes.logo} src={logo} />
+            <div className={classes.title}>Social Network</div>
+        </div>
+
+        <div >
+            {props.isAuth ? <div className={classes.loginBlock}><img className={classes.userIcon} src={props.profile.photos.small || userPic}>
+            </img> <div>{props.login}</div> <button onClick={props.logout}>Log out</button></div>
+                : <NavLink to={'/login'}>Login</NavLink>}
         </div>
     </header>
     );

@@ -7,14 +7,14 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 
 const Profile = (props) => {
-
+  
   return (
     <div className={classes.content}> {/*-----this class as deleted because we added app-wrapper-content*/}
       <div>
         <img className={classes.mainPic} src='https://www.artmajeur.com/medias/hd/n/o/nottrott/artwork/10805254_large-abstract-painting-958.jpg' />
       </div>
-      <ProfileInfo profile={props.profile} />
-      <MyPostsContainer /* store={props.store}  *//>
+      <ProfileInfo saveProfile={props.saveProfile} isOwner={props.isOwner} profile={props.profile} status={props.status} updateStatus={props.updateStatus} saveNewMainPic={props.saveNewMainPic} />
+      <MyPostsContainer /* store={props.store}  */ />
     </div>
   );
 }
