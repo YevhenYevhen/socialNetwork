@@ -15,7 +15,7 @@ class ProfileContainer extends React.Component {
   refreshComponent() {
     let userId = this.props.match.params.userId;
     if (!userId) {
-      userId = 17754;
+      userId = 17700;
     }
     this.props.getUserProfile(userId);
     this.props.getUserStatus(userId);

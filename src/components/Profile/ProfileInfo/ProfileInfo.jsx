@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
 
 
   let [editMode, setEditMode] = useState(false);
-  let [updatePictureMode, setUpdatePictureMode] = useState(false);
+  //let [updatePictureMode, setUpdatePictureMode] = useState(false);
 
   if (!props.profile) {
     return <Preloader />
@@ -24,20 +24,20 @@ const ProfileInfo = (props) => {
     }
   }
 
-  const onMouseDownCapture = (e) => {
+/*   const onMouseDownCapture = (e) => {
     setUpdatePictureMode(true);
   }
   const onMouseLeave = (e) => {
     setUpdatePictureMode(false);
-  }
+  } */
   return (
     <div className={classes.profileInfoWrapper}>
       <div className={classes.pictureNameStatus}>
-        <div onMouseLeave={onMouseLeave} onMouseDownCapture={onMouseDownCapture}> 
+       {/*  <div onMouseLeave={onMouseLeave} onMouseDownCapture={onMouseDownCapture}>  */}
         <img className={classes.userPic} src={props.profile.photos.large || userPic} />
-          {props.isOwner && updatePictureMode && <div><input className={classes.updateUserPicButton} type="file"
+          {props.isOwner && <div><input className={classes.updateUserPicButton} type="file"
             onChange={onMainPicSelected}></input></div>}
-        </div>
+        {/* </div> */}
         <div className={classes.fullName}>
           {props.profile.fullName}
         </div>
@@ -53,7 +53,7 @@ const ProfileInfo = (props) => {
 
 
 const Contact = ({ contactsTitle, contactsValue }) => {
-  return <div>{contactsTitle}:{contactsValue}</div>;
+  return <div><b>{contactsTitle}</b>:{contactsValue}</div>;
 }
 
 const ProfileData = ({ profile, isOwner, activateEditMode }) => {
