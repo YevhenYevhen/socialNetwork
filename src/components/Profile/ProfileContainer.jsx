@@ -8,6 +8,7 @@ import { usersAPI } from '../../Api/api';
 import { Redirect } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { getAuthUserPhoto } from '../../redux/authReducer';
 
 
 class ProfileContainer extends React.Component {
@@ -15,14 +16,17 @@ class ProfileContainer extends React.Component {
   refreshComponent() {
     let userId = this.props.match.params.userId;
     if (!userId) {
-      userId = 17700;
+      userId = this.props.authUserId;
     }
     this.props.getUserProfile(userId);
-    this.props.getUserStatus(userId);
+    this.props.getUserStatus(userId);        
+    this.props.getAuthUserPhoto();
   }
 
   componentDidMount() {
+
     this.refreshComponent();
+    
    /*  let userId = this.props.match.params.userId;
     if (!userId) {
       userId = 17700;
@@ -66,7 +70,8 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+  authUserId: state.auth.userId,
 })
 /* 
 let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
@@ -78,7 +83,7 @@ let withUrlContainer = withRouter(AuthRedirectComponent);
 export default connect (mapStateToProps, {getUserProfile})(withUrlContainer); */
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, saveNewMainPic, saveProfile }),
+  connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, saveNewMainPic, saveProfile, getAuthUserPhoto }),
   withRouter,
   withAuthRedirect
 )(ProfileContainer);

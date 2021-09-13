@@ -1,6 +1,7 @@
-import { authAPI, securityAPI } from "../Api/api";
+import { authAPI, profileAPI, securityAPI } from "../Api/api";
 const SET_USER_DATA = 'auth/SET-USER-DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'auth/GET-CAPTCHA-URL-SUCCESS';
+const SET_AUTH_USER_PHOTO = 'auth/SET-AUTH-USER-PHOTO';
 
 
 
@@ -11,7 +12,8 @@ let initialState = {
     login: null,
     isFetching: false,
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null,
+    authUserPhoto: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -27,6 +29,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 captchaUrl: action.captchaUrl
             }
+        case SET_AUTH_USER_PHOTO:
+            return {
+                ...state,
+                authUserPhoto: action.photo
+            }
         default:
             return state;
     }
@@ -35,6 +42,11 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })
 export const getCaptchaUrlSuccess = (captchaUrl) => ({ type: GET_CAPTCHA_URL_SUCCESS, captchaUrl })
+
+
+export const setAuthUserPhoto = (photo) => ({ type: SET_AUTH_USER_PHOTO, photo })
+
+
 
 /* export const getAuthUserData = () => async (dispatch) => {
   let response = await authAPI.me()
@@ -47,7 +59,11 @@ export const getCaptchaUrlSuccess = (captchaUrl) => ({ type: GET_CAPTCHA_URL_SUC
  */
 //=====================================THIS IS WHAT IT LOOKED LIKE BEFORE ASYNC AWAIT=====================================//
 
+
+
+
 export const getAuthUserData = () => (dispatch) => {
+
     return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let { id, email, login } = response.data.data;
@@ -57,9 +73,17 @@ export const getAuthUserData = () => (dispatch) => {
     })
 }
 
+export const getAuthUserPhoto = () => async (dispatch) => {
+    let response = await authAPI.me();
+    let authUserId = response.data.data.id;
+    let authUser = await profileAPI.getProfile(authUserId);
+    let authUserPhoto = authUser.data.photos.small;
+    dispatch(setAuthUserPhoto(authUserPhoto));
+}
+
 
 export const login = (email, password, captcha) => async (dispatch) => {
-    
+
     let response = await authAPI.login(email, password, captcha);
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData());

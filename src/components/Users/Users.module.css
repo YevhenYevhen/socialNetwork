@@ -1,55 +1,129 @@
-/* .userpic{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 0 0 0 30px;
-}
-
-.usersWrapper{
+.container{
     display: flex;
-    margin: 20px;
-    justify-content: space-around;
-  
-    
-}
-.usersWrapper div{
-    width: 170px;
-    padding: 5px 0 5px 0;
+    background-color: white;
+    max-width: 930px;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.userName{
-    font-size: 30px;
-}
-
-.locationInfo{
-    color: blue;
-}
-
-.borderWrapper{
-    border: 2px solid blue;
-    border-radius: 10px;
-    flex: 1 2 auto;
-    display: flex;
-    justify-content: space-around;
-    overflow: hidden;
-}
-
-.follow{
-    width: 100px;
-}
-
-
-
-.usersBody{
-    max-width: 935px;
-    overflow: hidden;
-}
-
- */
-
-
- .borderWrapper{
-    border: 1px solid blue;
+.user{
+    border: 1px solid rgba(0, 0, 0, 0.178);
     text-align: center;
+    min-width: 200px;
+    min-height: 300px;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    margin: 10px 10px 20px 10px;
+    background-color: rgba(87, 84, 84, 0.24);
+    border-radius: 10px;
+}
+
+@media (max-width:1155px) {
+    .user{
+        justify-content: space-between;
+        min-width: 250px;
+        min-height: 350px;
+        max-width: 250px;
+        
+    }
     
+}
+
+
+
+@media (max-width:1090px) {
+    .user{
+        justify-content: space-between;
+        min-width: 500px;
+        min-height: 650px;
+        max-width:650px;
+        margin: 30px auto;
+        justify-content: center;
+        
+    }
+    
+}
+
+.photo{
+    padding: 10px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+
+@media (max-width:1155px) {
+    .photo{
+        width: 200px;
+    }
+    
+}
+
+
+@media (max-width:1090px) {
+    .photo{
+        padding: 10px;
+        width: 400px;
+    }
+    
+}
+
+
+.button{
+ width: 170px;
+ height: 50px;
+ margin: 10px;
+ border-radius: 10px;
+ background-color: rgba(2, 63, 155, 0.74);
+ color: white;
+ font-size: 20px;
+}
+
+@media (max-width:1155px) {
+    .button{
+        width: 220px;
+        height: 60px;
+        margin: 10px;
+        font-size: 30px;
+       }
+    
+}
+
+
+@media (max-width:1090px) {
+    .button{
+        width: 420px;
+        height: 90px;
+        margin: 10px;
+        font-size: 30px;
+       }
+    
+}
+
+
+.name{
+    font-size: 20px;
+    font-weight: 300;
+    color: rgb(0, 0, 0);
+}
+
+@media (max-width:1155px) {
+    .name{
+        font-size: 30px;
+    }
+    
+}
+
+
+@media (max-width:1090px) {
+    .name{
+        font-size: 40px;
+    }
+    
+}
+
+.status{
+    font-size: 30px;
 }

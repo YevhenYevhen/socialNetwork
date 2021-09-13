@@ -7,11 +7,13 @@ const SET_CURRENT_PAGE = 'users/SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'users/SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'users/TOGGLE-IS-FETCHING';
 const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'users/TOGGLE-IS-FOLLOWING-IN-PROGRESS';
+const SET_FOLLOWED_USERS = 'users/SET-FOLLOWED-USERS';
 
 
 let initialState = {
     users: [],
-    pageSize: 30,
+   // followedUsers: [],
+    pageSize: 40,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -20,6 +22,7 @@ let initialState = {
 };
 
 const usersReducer = (state = initialState, action) => {
+    
     switch (action.type) {
         case FOLLOW:
             return {
@@ -47,7 +50,16 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             /* return { ...state, users: [...state.users, ...action.users] } */
             //CHANGED THIS ONE TO GET 10 USERS A PAGE. THIS WAY USERS GET REWRITTEN EVERYTIME THE PAGE CHANGES
-            return { ...state, users: [...action.users] }
+           
+            return { ...state, users: [...state.users, ...action.users] }
+        
+/*         case SET_FOLLOWED_USERS:
+            return {
+                ...state,
+                followedUsers: state.users.filter(u => u.followed === true)
+                    
+            } */
+            
         case SET_CURRENT_PAGE:
             return {
                 ...state,
@@ -76,7 +88,7 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const getUsers = (CurrentPage, pageSize) => {
+/* export const getUsers = (CurrentPage, pageSize) => {
     
     return async (dispatch) => {
         dispatch(toggleIsFetching(true));
@@ -86,8 +98,20 @@ export const getUsers = (CurrentPage, pageSize) => {
         dispatch(setTotalUsersCount(response.totalCount));
         dispatch(setCurrentPage(CurrentPage))
     }
-}
+} */
 
+
+export const getUsers = (pageNumber) => {
+    
+    return async (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        let response = await usersAPI.getUsers(pageNumber);
+        dispatch(toggleIsFetching(false));
+        //dispatch(setUsers(response.items));
+        dispatch(setFollowedUsers());
+        dispatch(setTotalUsersCount(response.totalCount));
+    }
+}
 
 const followUnfollowFlow = async (dispatch, userId, apiMethod, action) => {
         dispatch(toggleIsFollowingInProgress(true, userId));
@@ -95,6 +119,7 @@ const followUnfollowFlow = async (dispatch, userId, apiMethod, action) => {
         if (response.data.resultCode === 0) {
             dispatch(action(userId));
         }
+       dispatch(setFollowedUsers());
         dispatch(toggleIsFollowingInProgress(false, userId));
     }
 
@@ -113,7 +138,7 @@ export const follow = (userId) => {
 }
 
 
-
+export const setFollowedUsers = () => ({ type: SET_FOLLOWED_USERS })
 export const followSuccess = (userId) => ({ type: FOLLOW, userId })
 export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsers = (users) => ({ type: SET_USERS, users })

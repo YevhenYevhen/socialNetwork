@@ -5,18 +5,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 
 //export let rerenderEntireTree = (state) => {
   ReactDOM.render(
     //<React.StrictMode> TOOK THIS ONE AWAY BECAUSE THERE WERE 8 USERS INSTEAD OF 4 FOR SOME REASON
-      <BrowserRouter>
+      <HashRouter>
         <Provider store={store}>
           <App /* store={store}  // state={state} dispatch={store.dispatch.bind(store)} */ />
           </Provider>
-    </BrowserRouter>,
+    </HashRouter>,
     //</React.StrictMode>,
     document.getElementById('root')
   );

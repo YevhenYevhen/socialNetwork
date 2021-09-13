@@ -10,6 +10,7 @@ import { logout } from '../../redux/authReducer';
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
+
 /*         authAPI.me()
         //axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             //withCredentials: true
@@ -31,6 +32,8 @@ class HeaderContainer extends React.Component {
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
+    authUserId: state.auth.userId,
+    authUserPhoto: state.auth.authUserPhoto,
     profile: state.profilePage.profile
 });
 

@@ -16,7 +16,7 @@ export const Login = (props) => {
         if (e.email && e.email.length < 5) {
             errors.email = 'Enter a valid email';
         }
-        if (e.password && e.password.length < 5) {
+        if (e.password && e.password.length < 3) {
             errors.password = 'Password incorrect'
         }
         return errors;
@@ -47,7 +47,7 @@ export const Login = (props) => {
                         render={({ input, meta }) => (
                             <div className={classes.field}>
                                 <label>Password</label>
-                                <input {...input} placeholder='Password'/>
+                                <input {...input} placeholder='Password' type='password'/>
                                 {meta.touched && meta.error && <span className={classes.error}>{meta.error}</span>}
                             </div>
                         )}

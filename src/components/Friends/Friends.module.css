@@ -13,7 +13,7 @@
 
 .friendsTitle{
     font-size: 30px;
-    color: #fff;
+    color:black;
 }
 
 .friendsWrapper img{
@@ -31,6 +31,6 @@
 
 .friendItem{
   padding: 5px;
-  color: #fff;
+  color: black;
     
 }
