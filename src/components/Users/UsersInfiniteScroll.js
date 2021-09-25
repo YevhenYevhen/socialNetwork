@@ -1,24 +1,25 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
-import {setFollowedUsers, setUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress } from "../../redux/usersReducer";
+import { resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress} from "../../redux/usersReducer";
 import User from "./User";
 
 
 function UsersInfiniteScroll(props) {
-
   const [pageNumber, setPageNumber] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   
- 
   useEffect(() => {
-    props.getUsers(pageNumber).then((res) => setUsers(res))
-    props.setFollowedUsers()
-  }, [pageNumber, props.getUsers])
+    if (props.users)
+      props.resetUsers()
+  }, [])
 
+  useEffect(async () => {
+    props.getUsers(pageNumber)
+  }, [pageNumber])
 
   useEffect(() => {
     setHasMore(props.totalUsersCount > props.users.length)
-  }, [props.totalUsersCount, props.users.length])
+  }, [props.totalUsersCount,  props.users.length])
 
   const observer = useRef()
   const lastUserElementRef = useCallback(node => {
@@ -33,11 +34,11 @@ function UsersInfiniteScroll(props) {
     if (node) observer.current.observe(node)
   }, [props.isFetching, hasMore])
 
-
+  
   return (
     
     <User users={props.users}
-      followedUsers={props.followedUsers}
+      //followedUsers={props.followedUsers}
       isFetching={props.isFetching}
       totalUsersCount={props.totalUsersCount}
       isFollowingInProgress={props.isFollowingInProgress}
@@ -51,11 +52,13 @@ function UsersInfiniteScroll(props) {
 
 const mapStateToProps = (state) => ({
   users: state.usersPage.users,
-  followedUsers: state.usersPage.followedUsers,
+  //followedUsers: state.usersPage.followedUsers,
   isFetching: state.usersPage.isFetching,
   totalUsersCount: state.usersPage.totalUsersCount,
-  isFollowingInProgress: state.usersPage.isFollowingInProgress
+  isFollowingInProgress: state.usersPage.isFollowingInProgress,
 })
 
-export default connect(mapStateToProps, { setFollowedUsers, setUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress })(UsersInfiniteScroll);
+export default connect(mapStateToProps, {
+  resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress,
+})(UsersInfiniteScroll);
 

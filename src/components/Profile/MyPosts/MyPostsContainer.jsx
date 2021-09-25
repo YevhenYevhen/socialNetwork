@@ -37,6 +37,7 @@ import { connect } from 'react-redux';
 let mapStateToProps = (state) => {
   return {
     postsData: state.profilePage.postsData,
+    authUserPhoto: state.auth.authUserPhoto
 /*     newPostData: state.profilePage.newPostData */
   }
 }

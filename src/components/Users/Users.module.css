@@ -1,23 +1,23 @@
 .container{
     display: flex;
-    background-color: white;
-    max-width: 930px;
+    width: 900px;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 .user{
     border: 1px solid rgba(0, 0, 0, 0.178);
     text-align: center;
-    min-width: 200px;
-    min-height: 300px;
-    max-width: 200px;
+    width: 200px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    margin: 10px 10px 20px 10px;
-    background-color: rgba(87, 84, 84, 0.24);
+    margin: 10px 10px 10px 10px;
+    background-color: white;
     border-radius: 10px;
 }
 
@@ -81,6 +81,16 @@
  font-size: 20px;
 }
 
+.disabledButton{
+    width: 170px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    background-color: rgba(141, 141, 141, 0.233);
+}
+
 @media (max-width:1155px) {
     .button{
         width: 220px;
@@ -105,8 +115,10 @@
 
 .name{
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 500;
     color: rgb(0, 0, 0);
+    margin: 0 10px;
+    overflow: clip;
 }
 
 @media (max-width:1155px) {
@@ -125,5 +137,7 @@
 }
 
 .status{
-    font-size: 30px;
+    font-size: 20px;
+    overflow: clip;
+    margin: 0 10px;
 }

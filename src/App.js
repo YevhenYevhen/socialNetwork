@@ -4,7 +4,6 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Music from './components/Music/Music';
-import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router';
 import Login from './components/Login/Login';
@@ -14,7 +13,6 @@ import Preloader from './components/Common/Preloader';
 import { withSuspense } from './hoc/withSuspense';
 import { Switch } from 'react-router-dom';
 import UsersInfiniteScroll from './components/Users/UsersInfiniteScroll';
-import FollowedUsers from './components/Users/FollowedUsers';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
@@ -29,11 +27,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.initializeApp();
-    window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors )
+    window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors )
+    window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
   }
 
   render() {
@@ -41,11 +39,11 @@ class App extends React.Component {
       return <Preloader />
     }
     return (
-      <div className='app-wrapper'>
+      <div className={this.props.isAuth ? 'app-wrapper' : 'initial-app-wrapper' }>
         <HeaderContainer />
         <div className='app-wrapper-content'>
           <Switch>
-          <Route exact path='/' render={withSuspense(ProfileContainer)} />
+            <Route exact path='/' render={withSuspense(ProfileContainer)} />
             {/* <Route path='/dialogs' render={() => {
             return <Suspense fallback={<Preloader />}>
               <DialogsContainer />
@@ -61,21 +59,27 @@ class App extends React.Component {
             <Route path='/music' render={() => <Music />} />
             <Route path='/settings' render={() => <Settings />} />
             {/*  <Route path='/users' render={() => <UsersContainer />} /> */}
-          {  <Route path='/users' render={() => <UsersInfiniteScroll />} />}
+            <Route path='/users' render={() => <UsersInfiniteScroll />} />
             <Route path='/login/facebook' render={() => <div>Facebook Login</div>} />
             <Route path='/login' render={() => <Login />} />
-            <Route path='/followedUsers' render={() => <FollowedUsers />} />
             <Route path='*' render={() => <div>404 NOT FOUND</div>} />
           </Switch>
-        </div>
-        <Navbar />
+        </div >
+
+        {this.props.isAuth && <div className='app-navbar'>
+          <Navbar />
+        </div>}
+
+
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  initialized: state.app.initialized
+  initialized: state.app.initialized,
+  isAuth: state.auth.isAuth
+
 })
 
 export default connect(mapStateToProps, { initializeApp })(App);

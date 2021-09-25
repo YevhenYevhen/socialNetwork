@@ -4,9 +4,17 @@
 }
 
 .mainPic {
-    width: 100%;
+    width: 99%;
     height: 250px;
-    margin: 0 0 10px 0;
+    margin: 20px 0 0 10px;
+    border-radius: 8px;
 }
 
 
+.infoAndFriends{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+
+    
+}

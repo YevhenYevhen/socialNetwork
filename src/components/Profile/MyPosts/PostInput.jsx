@@ -1,24 +1,20 @@
 import { Form, Field } from 'react-final-form'
 import { connect } from 'react-redux';
 import { addPostActionCreator } from '../../../redux/profileReducer';
+import classes from './MyPosts.module.css';
+
 
 
 export const PostInput = (props) => {
-    
-    const onSubmit = (e) => {
-        props.addPost(e.post);
+  const onSubmit = (e) => {
+    if (e.post) {
+      props.addPost(e.post);
     }
-    const validate = (e) => {
-        const errors = {};
-        if (e.post && e.post === 0) {
-            errors.post = 'Enter a valid email';
-        }
-        return errors;
+      e.post = '';
     }
-     
+
   return <Form
     onSubmit={onSubmit}
-    validate={validate}
     render={({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
         <Field
@@ -26,12 +22,13 @@ export const PostInput = (props) => {
           render={({ input, meta }) => (
             <div>
               {/* <label>Enter your message</label> */}
-              <textarea placeholder='Enter your post' {...input} />
-              {meta.touched && meta.error && <span>{meta.error}</span>}
+              <textarea placeholder='Enter your post' rows="5" cols="110" {...input} />
+              {/* {meta.touched && meta.error && <span>{meta.error}</span>} */}
             </div>
+            
           )}
         />
-        <button type="submit">Post</button>
+        <button className={classes.submitButton} type="submit">Post</button>
       </form>
     )}
   />

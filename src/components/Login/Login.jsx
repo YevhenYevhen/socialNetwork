@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../redux/authReducer';
 import classes from './Login.module.css';
+import logoIcon from '../../assets/icons/logo.png'
+
 
 
 
@@ -25,8 +27,12 @@ export const Login = (props) => {
         return <Redirect to={'/profile'}/>
     }
     
-    return (
-        <div className={classes.wrapper}> 
+    return (<div className={classes.wrapper}>
+        <div className={classes.logo}>
+            <img src={logoIcon} alt="" />
+            <div>Social Network</div> 
+        </div>
+        <div className={classes.input}>
         <Form
             onSubmit={onSubmit}
             validate={validate}
@@ -67,11 +73,12 @@ export const Login = (props) => {
                     />}
                     
                     <div className={classes.buttonContainer}>
-                        <button className={classes.submitButton} type="submit">Submit</button>
+                        <button className={classes.submitButton} type="submit">Log in</button>
                     </div>
                 </form>
             )} />
-    </div>
+        </div>
+        </div>
     )
 }
 

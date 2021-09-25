@@ -1,18 +1,33 @@
 .nav {
   grid-area: n;
-  background-color: #fff;
   padding: 20px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 90px;
-  max-height: 83vh;
+  /* position: -webkit-sticky; */
+  /* position: sticky;
+  top: 50px; */
+  height: fit-content;
+  border-radius: 8px;
+  height: 200px;
 }
 
 .item a {
   color: #000;
   text-decoration: none;
+
 }
 
 .item a.activeLink {
   color: darkblue;
+}
+
+.item{
+  margin: 10px 0;
+
+}
+
+.icon{
+  width: 20px;
+  height: 20px;
+  display: inline;
+  vertical-align: middle;
+  margin-right: 10px;
 }

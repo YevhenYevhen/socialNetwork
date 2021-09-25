@@ -1,0 +1,33 @@
+.wrapper{
+    width: 45%;
+    max-height: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid rgb(196, 196, 196);
+}
+.title{
+    font-size: 20px;
+    margin: 0 0 0 80px;
+
+}
+
+.friendPhoto{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.friendName{
+    text-align: center;
+}
+.friendsBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 400px;
+    
+}
+
+.friend{
+    margin: 30px;
+}

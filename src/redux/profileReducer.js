@@ -14,6 +14,14 @@ let initialState = {
         { id: 2, message: 'This is crazy!', likesCounter: 34 },
         { id: 6, message: 'I am so excited', likesCounter: 0 }
     ],
+    friends: [
+        { id: 1, name: 'Ross', photo: 'https://fwcdn.pl/cpo/05/66/566/862.4.jpg' },
+        { id: 2, name: 'Rachel', photo: 'https://wallpaperaccess.com/full/2462698.png' },
+        { id: 3, name: 'Phoebe', photo: 'https://upload.wikimedia.org/wikipedia/en/f/f6/Friendsphoebe.jpg' },
+        { id: 4, name: 'Chandler', photo: 'https://pbs.twimg.com/profile_images/1257292276209979392/ELX3_1oY.jpg' },
+        { id: 5, name: 'Joey', photo: 'https://i.guim.co.uk/img/media/513976d50736695ee8bd5014175e007f9980531f/0_289_2980_1788/master/2980.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=77863ec7b2622437668af3ff9ecd7ae6' },
+        { id: 6, name: 'Monica', photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3QTRdOptHbRhCV6oc4s1c41waSaX354lkVg&usqp=CAU' }
+    ],
     newPostData: '',
     profile: null,
     status: ''
@@ -23,13 +31,13 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 5,
+                id: 4,
                 message: action.newPostData,
                 likesCounter: 0
             };
             return {
                 ...state,
-                postsData: [...state.postsData, {id: 5, message: action.newPostData}],
+                postsData: [...state.postsData, newPost],
                 //newPostData: ''
             };
             //stateCopy.postsData = [...state.postsData];
