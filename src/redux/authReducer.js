@@ -82,7 +82,8 @@ export const login = (email, password, captcha) => async (dispatch) => {
         dispatch(getAuthUserData()).then(res => {
             if (res) {
                 let error = res;
-                alert(error)
+                alert(`${error} :(
+This might have happened because cross-site tracking isn't allowed in your browser. Try allowing it in your browser settings.`)
             }
         });
     } else {
