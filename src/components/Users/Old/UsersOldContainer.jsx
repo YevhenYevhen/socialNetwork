@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setCurrentPage, toggleIsFollowingInProgress, getUsers} from '../../redux/usersReducer';
+import { follow, unfollow, setCurrentPage, toggleIsFollowingInProgress, getUsers} from '../../../redux/usersReducer';
 import Users from './Users';
-import Preloader from '../Common/Preloader';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import Preloader from '../../Common/Preloader';
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import { getCurrentPage, getIsFetching, getIsFollowingInProgress, getPageSize, getTotalUsersCount, getUsersSuperSelector } from '../../redux/usersSelectors';
+import { getCurrentPage, getIsFetching, getIsFollowingInProgress, getPageSize, getTotalUsersCount, getUsersSuperSelector } from '../../../redux/usersSelectors';
 
 
 

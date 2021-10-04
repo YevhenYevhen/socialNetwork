@@ -2,9 +2,6 @@ import React from 'react';
 import classes from './Users.module.css';
 import userpic from '../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
-import Pagination from '../Common/Pagination/Pagination';
-import { usersAPI } from '../../Api/api';
-
 
 let User = ({ currentPage, totalUsersCount, pageSize, onPageChanged, user, ...props }) => {
     let u = user;

@@ -19,20 +19,7 @@ class ProfileContainer extends React.Component {
   }
 
   componentDidMount() {
-
     this.refreshComponent();
-    
-   /*  let userId = this.props.match.params.userId;
-    if (!userId) {
-      userId = 17700;
-    }
-    this.props.getUserProfile(userId);
-    this.props.getUserStatus(userId); */
-   /*  usersAPI.getProfile(userId)
-  //axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-      .then(response => {
-        this.props.setUserProfile(response.data)
-      }) */
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -40,9 +27,8 @@ class ProfileContainer extends React.Component {
       this.refreshComponent();
       
     }
- 
-
   }
+  
   render() {
     return (
       <Profile {...this.props}

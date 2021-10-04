@@ -1,6 +1,5 @@
 
 const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
-//const UPDATE_NEW_MESSAGE_DATA = 'UPDATE-NEW-MESSAGE-DATA';
 
 let initialState = {
     messagesData: [
@@ -40,7 +39,6 @@ let initialState = {
         { id: 34, text: 'how you doin?' },
         { id: 35, text: 'Call me!' },
       ],
-      /* newMessageData: '', */
       dialogsData: [
         { id: 1, name: 'Ross', photo: 'https://fwcdn.pl/cpo/05/66/566/862.4.jpg' },
         { id: 2, name: 'Rachel', photo: 'https://wallpaperaccess.com/full/2462698.png' },
@@ -57,8 +55,6 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
 
     
-    
-    
     switch (action.type) {
         case SEND_MESSAGE: {
             let newMessage = {
@@ -68,19 +64,8 @@ const dialogsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 messagesData: [...state.messagesData, {...newMessage}],
-                /* newMessageData: '' */
             };
-            // stateCopy.messagesData = [...state.messagesData];
-            // stateCopy.messagesData.push(newMessage);
-            // return stateCopy;
         }
-        /* case UPDATE_NEW_MESSAGE_DATA: {
-            return {
-                ...state,
-                newMessageData: action.currentMessage
-            };
-            //return stateCopy;
-        } */
         default:
             return state;
 
@@ -88,8 +73,5 @@ const dialogsReducer = (state = initialState, action) => {
 }
 
 export const sendMessageActionCreator = (messageText, messageId) => ({ type: SEND_MESSAGE, newMessageData: messageText, messageId })
-/* export const onMessageChangeActionCreator = (messageText) => ({
-  type: UPDATE_NEW_MESSAGE_DATA,
-  currentMessage: messageText
-}) */
+
 export default dialogsReducer;

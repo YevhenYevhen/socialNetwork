@@ -5,9 +5,11 @@ const SET_AUTH_USER_POFILE = 'auth/SET-AUTH-USER-PROFILE';
 const SET_AUTH_USER_PHOTO = 'auth/SET-AUTH-USER-PHOTO';
 
 
-
-
 let initialState = {
+    initialValues: {
+        demoEmail: 'free@samuraijs.com',
+        demoPassword: 'free'
+    },
     userId: null,
     email: null,
     login: null,
@@ -25,7 +27,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                //  isAuth: true
             }
         case GET_CAPTCHA_URL_SUCCESS:
             return {
@@ -55,23 +56,7 @@ export const setAuthUserPhoto = (photo) => ({ type: SET_AUTH_USER_PHOTO, photo }
 
 
 
-
-/* export const getAuthUserData = () => async (dispatch) => {
-  let response = await authAPI.me()
-        if (response.data.resultCode === 0) {
-            let { id, email, login } = response.data.data;
-            dispatch(setAuthUserData(id, email, login, true));
-            
-        }
-}
- */
-//=====================================THIS IS WHAT IT LOOKED LIKE BEFORE ASYNC AWAIT=====================================//
-
-
-
-
 export const getAuthUserData = () => async (dispatch) => {
-
     let response = await authAPI.me()
     if (response.data.resultCode === 0) {
         let { id, email, login } = response.data.data;
@@ -82,6 +67,9 @@ export const getAuthUserData = () => async (dispatch) => {
         let authUserPhoto = authUser.data.photos.large;
         dispatch(setAuthUserProfile(authUserProfile));
         dispatch(setAuthUserPhoto(authUserPhoto))
+    } else if (response.data.resultCode === 1) {
+        let error = response.data.messages[0];
+        return error;
     }
 
 }
@@ -89,10 +77,14 @@ export const getAuthUserData = () => async (dispatch) => {
 
 
 export const login = (email, password, captcha) => async (dispatch) => {
-
     let response = await authAPI.login(email, password, captcha);
     if (response.data.resultCode === 0) {
-        dispatch(getAuthUserData());
+        dispatch(getAuthUserData()).then(res => {
+            if (res) {
+                let error = res;
+                alert(error)
+            }
+        });
     } else {
         if (response.data.resultCode === 10) {
             dispatch(getCaptchaUrl());

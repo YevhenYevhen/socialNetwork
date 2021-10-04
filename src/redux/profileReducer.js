@@ -1,6 +1,5 @@
 import { profileAPI, usersAPI } from "../Api/api";
 const ADD_POST = 'profile/ADD-POST';
-//const UPDATE_NEW_POST_DATA = 'UPDATE-NEW-POST-DATA';
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_STATUS = 'profile/SET-USER-STATUS';
 const DELETE_POST = 'profile/DELETE-POST';
@@ -37,21 +36,8 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postsData: [...state.postsData, newPost],
-                //newPostData: ''
             };
-            //stateCopy.postsData = [...state.postsData];
-            // stateCopy.postsData.push(newPost);
-            // stateCopy.newPostData = '';
-            //return stateCopy;
         }
-      /*   case UPDATE_NEW_POST_DATA: {
-            return {
-                ...state,
-                newPostData: action.currentText
-            };
-           // stateCopy.newPostData = action.currentText;
-            //return stateCopy;
-        } */
         case SET_USER_PROFILE: {
             return {
                 ...state, profile: action.profile
@@ -62,35 +48,26 @@ const profileReducer = (state = initialState, action) => {
                 ...state, status: action.status
             };
         }
-/*         case UPDATE_STATUS: {
-            return {
-                ...state, status: action.status
-            }
-        } */
         case DELETE_POST: {
             return {
-                ...state, postsData: state.postsData.filter(p => p.id !== action.postId )
+                ...state, postsData: state.postsData.filter(p => p.id !== action.postId)
             };
         }
         case SAVE_NEW_MAIN_PIC_SUCCESS: {
             return {
-                ...state, profile: {...state.profile, photos: action.photos}
+                ...state, profile: { ...state.profile, photos: action.photos }
             };
         }
         default:
             return state;
-   }
+    }
 }
 
 
 export const addPostActionCreator = (postData) => ({ type: ADD_POST, newPostData: postData })
-/* export const onPostChangeActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_DATA,
-    currentText: text
-}) */
 export const deletePost = (postId) => ({ type: DELETE_POST, postId: postId })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
-export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
+export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 export const saveNewMainPicSuccess = (photos) => ({ type: SAVE_NEW_MAIN_PIC_SUCCESS, photos })
 
 
@@ -98,39 +75,39 @@ export const saveNewMainPicSuccess = (photos) => ({ type: SAVE_NEW_MAIN_PIC_SUCC
 
 export const getUserProfile = (userId) => async (dispatch) => {
     let response = await usersAPI.getProfile(userId);
-          dispatch(setUserProfile(response.data));
+    dispatch(setUserProfile(response.data));
 }
 
 
 export const getUserStatus = (userId) => async (dispatch) => {
     let response = await profileAPI.getStatus(userId);
-            dispatch(setUserStatus(response.data));
+    dispatch(setUserStatus(response.data));
 }
 
 export const updateStatus = (status) => async (dispatch) => {
-   let response = await profileAPI.updateStatus(status);
-            if (response.data.resultCode === 0) {
-                dispatch(setUserStatus(status));
-            }
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(status));
+    }
 }
 
 export const saveNewMainPic = (file) => async (dispatch) => {
     let response = await profileAPI.saveNewMainPic(file);
-             if (response.data.resultCode === 0) {
-                 dispatch(saveNewMainPicSuccess(response.data.data.photos));
-             }
- }
+    if (response.data.resultCode === 0) {
+        dispatch(saveNewMainPicSuccess(response.data.data.photos));
+    }
+}
 
 
 export const saveProfile = (profile) => async (dispatch, getState) => {
-   let userId = getState().auth.userId;
+    let userId = getState().auth.userId;
     let response = await profileAPI.saveProfile(profile);
-             if (response.data.resultCode === 0) {
-                 dispatch(getUserProfile(userId));
-             }
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId));
+    }
     let resultCode = response.data.resultCode;
     return resultCode;
- }
+}
 
 export default profileReducer;
 

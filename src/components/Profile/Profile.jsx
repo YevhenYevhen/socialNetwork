@@ -9,7 +9,7 @@ import logoIcon from '../../assets/icons/logo.png'
 const Profile = (props) => {
   
   return (
-    <div className={classes.content}> {/*-----this class as deleted because we added app-wrapper-content*/}
+    <div className={classes.content}> 
       <div className={classes.banner}>
         <img className={classes.logoIcon} src={logoIcon} alt='' />
       </div>
@@ -19,7 +19,7 @@ const Profile = (props) => {
         updateStatus={props.updateStatus} saveNewMainPic={props.saveNewMainPic} />
       <Friends />
       </div>
-      <MyPostsContainer /* store={props.store}  */ />
+      <MyPostsContainer/>
       
     </div>
   );

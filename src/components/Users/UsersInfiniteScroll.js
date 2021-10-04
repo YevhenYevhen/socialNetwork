@@ -2,14 +2,14 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-import { resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress} from "../../redux/usersReducer";
+import { resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress } from "../../redux/usersReducer";
 import User from "./User";
 
 
 function UsersInfiniteScroll(props) {
   const [pageNumber, setPageNumber] = useState(1)
   const [hasMore, setHasMore] = useState(true)
-  
+
   useEffect(() => {
     if (props.users)
       props.resetUsers()
@@ -21,7 +21,7 @@ function UsersInfiniteScroll(props) {
 
   useEffect(() => {
     setHasMore(props.totalUsersCount > props.users.length)
-  }, [props.totalUsersCount,  props.users.length])
+  }, [props.totalUsersCount, props.users.length])
 
   const observer = useRef()
   const lastUserElementRef = useCallback(node => {
@@ -39,9 +39,8 @@ function UsersInfiniteScroll(props) {
 
 
   return (
-    
+
     <User users={props.users}
-      //followedUsers={props.followedUsers}
       isFetching={props.isFetching}
       totalUsersCount={props.totalUsersCount}
       isFollowingInProgress={props.isFollowingInProgress}
@@ -49,13 +48,12 @@ function UsersInfiniteScroll(props) {
       unfollow={props.unfollow}
       toggleIsFollowingInProgress={props.toggleIsFollowingInProgress}
       lastUserElementRef={lastUserElementRef}
-      />
+    />
   );
 }
 
 const mapStateToProps = (state) => ({
   users: state.usersPage.users,
-  //followedUsers: state.usersPage.followedUsers,
   isFetching: state.usersPage.isFetching,
   totalUsersCount: state.usersPage.totalUsersCount,
   isFollowingInProgress: state.usersPage.isFollowingInProgress,

@@ -46,7 +46,7 @@ let store = {
     return this._state;
   },
   subscribe(observer) {
-    this._callSubscriber = observer; // PATTERN OBSERVER // PUBLISHER-SUBSCRIBER //READ ABOUT IT 
+    this._callSubscriber = observer;  
   },
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action);

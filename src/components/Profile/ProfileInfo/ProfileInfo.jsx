@@ -24,7 +24,6 @@ const ProfileInfo = (props) => {
   }, [updatePictureMode, props.isOwner]);
 
   const handleClickOutside = e => {
-    console.log("clicking anywhere");
     if (node.current.contains(e.target)) {
       // inside click
       return;
@@ -100,52 +99,43 @@ const Contact = ({ contactsTitle, contactsValue }) => {
 
   switch (contactsTitle) {
     case ('facebook'):
-      return <a href={contactsValue}><img 
+      return <a href={contactsValue}><img
         className={classes.icon}
         src='https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Facebook_svg-128.png' alt='' /></a>
     case ('github'):
       return <a href={contactsValue}><img
-          className={classes.icon}
-          src='https://icons-for-free.com/iconfiles/png/512/part+1+github-1320568339880199515.png' alt='' /></a>
+        className={classes.icon}
+        src='https://icons-for-free.com/iconfiles/png/512/part+1+github-1320568339880199515.png' alt='' /></a>
     case ('instagram'):
       return <a href={contactsValue} ><img
-          className={classes.icon}
-          src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Instagram_svg-128.png" alt="" /></a>
+        className={classes.icon}
+        src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Instagram_svg-128.png" alt="" /></a>
     case ('twitter'):
       return <a href={contactsValue} ><img
-          className={classes.icon}
-          src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Twitter_svg-128.png" alt="" /></a>
+        className={classes.icon}
+        src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Twitter_svg-128.png" alt="" /></a>
     case ('youtube'):
       return <a href={contactsValue} ><img
-          className={classes.icon}
-          src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Youtube_svg-128.png" alt="" /></a>
+        className={classes.icon}
+        src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Youtube_svg-128.png" alt="" /></a>
     default: return;
 
   }
 }
 
 
-
-
-
-
-
-
 const ProfileData = ({ profile }) => {
 
   return <div className={classes.contactsContainer}>
-      {Object.keys(profile.contacts).filter(key => key !== 'mainLink' && key !== 'vk' && key !== 'website')
-        .map(key => {
-          if (profile.contacts[key]) {
-            return <div key={key} className={classes.iconContainer}>
-              <Contact contactsTitle={key} contactsValue={profile.contacts[key]} />
-            </div>
-          } else return null;
-        })}
-    </div>
+    {Object.keys(profile.contacts).filter(key => key !== 'mainLink' && key !== 'vk' && key !== 'website')
+      .map(key => {
+        if (profile.contacts[key]) {
+          return <div key={key} className={classes.iconContainer}>
+            <Contact contactsTitle={key} contactsValue={profile.contacts[key]} />
+          </div>
+        } else return null;
+      })}
+  </div>
 }
-
-
-
 
 export default ProfileInfo;

@@ -33,7 +33,6 @@ const NewsInfiniteScroll = () => {
 
 
 
-
     const observer = useRef()
     const lastUserElementRef = useCallback(node => {
         if (isFetching) return

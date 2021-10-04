@@ -39,26 +39,17 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
-                /*                 users: state.users.map(u => {
-                                    if (u.id === action.userId) {
-                                        return { ...u, followed: false }
-                                    }
-                                    return u;
-                                }) */
             }
         case SET_USERS:
-            /* return { ...state, users: [...state.users, ...action.users] } */
-            //CHANGED THIS ONE TO GET 10 USERS A PAGE. THIS WAY USERS GET REWRITTEN EVERYTIME THE PAGE CHANGES
-
-            return { ...state, users: [...state.users, ...action.users] }
-
-
+            return {
+                ...state,
+                users: [...state.users, ...action.users]
+            }
         case RESET_USERS:
             return {
                 ...state,
                 users: []
             }
-
         case SET_CURRENT_PAGE:
             return {
                 ...state,
@@ -87,21 +78,8 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-/* export const getUsers = (CurrentPage, pageSize) => {
-    
-    return async (dispatch) => {
-        dispatch(toggleIsFetching(true));
-        let response = await usersAPI.getUsers(CurrentPage, pageSize);
-        dispatch(toggleIsFetching(false));
-        dispatch(setUsers(response.items));
-        dispatch(setTotalUsersCount(response.totalCount));
-        dispatch(setCurrentPage(CurrentPage))
-    }
-} */
-
 
 export const getUsers = (pageNumber) => {
-
     return async (dispatch) => {
         dispatch(toggleIsFetching(true));
         let response = await usersAPI.getUsers(pageNumber);
@@ -142,4 +120,6 @@ export const setCurrentPage = (pageNumber) => ({ type: SET_CURRENT_PAGE, pageNum
 export const setTotalUsersCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleIsFollowingInProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, isFetching, userId })
+
+
 export default usersReducer;

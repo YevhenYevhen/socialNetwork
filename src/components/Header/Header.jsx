@@ -16,7 +16,6 @@ const Header = (props) => {
 
 
     const handleClickOutside = e => {
-        console.log("clicking anywhere");
         if (node.current.contains(e.target)) {
           // inside click
           return;
@@ -69,7 +68,6 @@ const Header = (props) => {
         )
     }
     
-    
     const DropdownMenu = (props) => {
         const logoutAndClose = () => {
             props.logout()
@@ -104,7 +102,6 @@ const Header = (props) => {
         )
     }
 
-    
     if (props.isAuth) {
         return (
             <Navbar authUserPhoto={props.authUserPhoto} login={props.login} logout={props.logout}>

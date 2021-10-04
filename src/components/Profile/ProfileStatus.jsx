@@ -30,7 +30,11 @@ export default class ProfileStatus extends Component {
     }
     render() {
         return (<div>
-            {this.state.editMode && <input value={this.status} onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode}></input>}
+            {this.state.editMode && <input value={this.status}
+                onChange={this.onStatusChange}
+                autoFocus={true}
+                onBlur={this.deactivateEditMode}>
+            </input>}
             {!this.state.editMode && <div><span onClick={this.activateEditMode}>{this.status && '======='}</span></div>}
             </div>
         )

@@ -1,6 +1,17 @@
 body{
   background-color: rgb(239, 239, 239);
 }
+
+.initial-app-wrapper{ 
+  margin: 0 auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-areas: 
+  "h"
+  "c";
+  height: 100%;
+}
+
 .app-wrapper{
   margin: 0 auto;
   max-width: 1200px;
@@ -13,16 +24,6 @@ body{
   grid-gap: 10px;
   min-height: 100vh;
 
-}
-
-.initial-app-wrapper{ 
-  margin: 0 auto;
-  max-width: 1200px;
-  display: grid;
-  grid-template-areas: 
-  "h"
-  "c";
-  height: 100%;
 }
 
 .app-wrapper-content{
@@ -47,14 +48,6 @@ height: fit-content;
   }
   .app-wrapper-content{
     margin: 0 20px;
-  }
-}
-
-@media (max-width:890px) {
-  .app-wrapper{
-    grid-template-areas: 
-    "h h"
-    "c c";
   }
 }
 

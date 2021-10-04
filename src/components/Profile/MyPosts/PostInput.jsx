@@ -6,7 +6,7 @@ import classes from './MyPosts.module.css';
 
 
 export const PostInput = (props) => {
-  
+
   const onSubmit = (e) => {
     if (e.post) {
       props.addPost(e.post);
@@ -33,8 +33,6 @@ export const PostInput = (props) => {
 }
 
 
-
-
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (postData) => {
@@ -43,8 +41,6 @@ let mapDispatchToProps = (dispatch) => {
     },
   }
 }
-
-
 
 let PostInputContainer = connect(null, mapDispatchToProps)(PostInput);
 

@@ -6,8 +6,6 @@ import Preloader from '../Common/Preloader';
 
 const ProfileDataForm = (props) => {
 
-
-
     const [isSaving, setIsSaving] = useState(false)
     const [savingSuccess, setSavingSuccess] = useState(false)
 
@@ -26,19 +24,11 @@ const ProfileDataForm = (props) => {
                 setSavingSuccess(true);
                 setIsSaving(false);
             } else {
-                console.log(res);
                 setSavingSuccess(false);
                 setIsSaving(false);
             }
         });
 
-    }
-    const validate = (e) => {
-        const errors = {};
-        if (false) {
-            errors.email = 'Enter a valid email';
-        }
-        return errors;
     }
 
     return (<>
@@ -51,7 +41,6 @@ const ProfileDataForm = (props) => {
             </div>
             <Form
                 onSubmit={onSubmit}
-                validate={validate}
                 render={({ handleSubmit }) => (
                     <form className={classes.profileForm} onSubmit={handleSubmit}>
                         <Field
@@ -61,7 +50,6 @@ const ProfileDataForm = (props) => {
                                 <div className={classes.inputContainer}>
                                     <label className={classes.label}>Full Name</label>
                                     <textarea className={classes.input} {...input} placeholder='Full Name' />
-                                    {meta.touched && meta.error && <span>{meta.error}</span>}
                                 </div>
                             )}
                         />
@@ -72,7 +60,6 @@ const ProfileDataForm = (props) => {
                                 <div className={classes.inputContainer}>
                                     <label className={classes.label}>About me</label>
                                     <textarea className={classes.input}  {...input} placeholder='About me' />
-                                    {meta.touched && meta.error && <span >{meta.error}</span>}
                                 </div>
                             )}
                         />
@@ -87,7 +74,6 @@ const ProfileDataForm = (props) => {
                                         <div className={classes.inputContainer}>
                                             <label className={classes.label}>{key}</label>
                                             <textarea className={classes.input}  {...input} placeholder={key} />
-                                            {meta.touched && meta.error && <span >{meta.error}</span>}
                                         </div>
                                     )}
                                 />

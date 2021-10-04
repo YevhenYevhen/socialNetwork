@@ -7,7 +7,7 @@ import classes from './Dialogs.module.css';
 
 export const DialogsForm = (props) => {
   const [messageId, setMessageId] = useState(36)
-  
+
   const onSubmit = (e) => {
     if (e.message) {
       props.sendMessage(e.message, messageId);
@@ -15,9 +15,6 @@ export const DialogsForm = (props) => {
       setMessageId(prevMessageId => prevMessageId + 1)
     }
   }
-
-
- 
 
   return <Form
     onSubmit={onSubmit}
@@ -50,8 +47,6 @@ let mapDispatchToProps = (dispatch) => {
     },
   }
 }
-
-
 
 let DialogsFormContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsForm);
 

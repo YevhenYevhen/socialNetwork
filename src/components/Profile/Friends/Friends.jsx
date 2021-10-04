@@ -7,7 +7,6 @@ import Friend from "./Friend";
     )
 }
 
-
 const mapStateToProps = (state) => ({
     friends: state.profilePage.friends
 })

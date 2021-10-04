@@ -8,18 +8,9 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 const Settings = (props) => {
-    
-
-   /*  useEffect(() => {
-        props.getUserProfile(props.authUserId);
-    }, [])
- */
-  
-
     if (!props.profile) {
         return <Preloader />
     }
-    
     return (
         <div className={classes.wrapper}>
             <ProfileDataForm profile={props.profile} saveProfile={props.saveProfile}  initialValue={props.profile}  />

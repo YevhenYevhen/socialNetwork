@@ -16,7 +16,7 @@ ReactDOM.render(
         <ScrollToTop />
         <App/>
       </Provider>
-    </HashRouter>,
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

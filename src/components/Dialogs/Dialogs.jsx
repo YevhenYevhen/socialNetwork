@@ -29,7 +29,8 @@ const Dialogs = (props) => {
     if (windowWidth < 700)
         return (<>
             <div className={classes.wrapper}>
-            {messageMode && <div className={classes.back} onClick={() => setMessageMode(false)}><span> &larr; Back</span></div>}
+                {messageMode && <div className={classes.back}
+                    onClick={() => setMessageMode(false)}><span>&larr; Back</span></div>}
                 {!messageMode && <div className={classes.dialogsContainer}>
                     {dialogsElements}
                 </div>}
