@@ -9,10 +9,8 @@ import Preloader from '../Common/Preloader';
 
 
 export const Login = (props) => {
-    
     const [error, setError] = useState(null)
     const [isFetching, setIsFetching] = useState(false)
-    console.log(error);
     const onSubmit = (e) => {
         setIsFetching(true)
         props.login(e.email, e.password, e.captcha).then((error) => {

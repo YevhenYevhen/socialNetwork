@@ -28,7 +28,6 @@ function UsersInfiniteScroll(props) {
     if (props.isFetching) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
-      console.log(entries)
       if (entries[0].isIntersecting && hasMore) {
         setPageNumber(prevPageNumber => prevPageNumber + 1)
       }

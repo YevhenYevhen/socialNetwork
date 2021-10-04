@@ -14,7 +14,6 @@ const NewsInfiniteScroll = () => {
             let response = await newsAPI.getNews();
             setNews([response.data.news])
             setIsFetching(false)
-            console.log(response);
         }
         getNews();
     }, [])
@@ -38,7 +37,6 @@ const NewsInfiniteScroll = () => {
         if (isFetching) return
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
-            console.log(entries)
             if (entries[0].isIntersecting) {
                 setPageNumber(prevPageNumber => prevPageNumber + 1)
             }
