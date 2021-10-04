@@ -10,7 +10,7 @@ const User = (props) => {
     return <>
         <div className={classes.container}>
             {props.users.map((user, index) => {
-                let following = props.isFollowingInProgress.some(id => id == user.id);
+                let following = props.isFollowingInProgress.some(id => id === user.id);
                 let refElement = props.users.length === index + 1;
                 let trimmedStatus;
                 let trimmedName;
@@ -25,11 +25,11 @@ const User = (props) => {
                 }
                 return <div className={classes.user} ref={refElement ? props.lastUserElementRef : undefined} key={user.name}>
                     <NavLink to={'/profile/' + user.id}>
-                        <img className={classes.photo} src={user.photos.large || userpic}></img>
+                        <img className={classes.photo} src={user.photos.large || userpic} alt=''></img>
                     </NavLink>
                     <div className={classes.name}>{trimmedName || user.name}</div>
                     <div className={classes.status}>{trimmedStatus || user.status}</div>
-                    <div>
+                    <div className={classes.buttonContainer}>
                         {user.followed
                             ? <button disabled={following}
                                 className={following ? classes.disabledButton : classes.button}

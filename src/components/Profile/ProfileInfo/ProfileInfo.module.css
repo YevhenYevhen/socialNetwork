@@ -1,143 +1,288 @@
-
-.wrapper{
+.wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     background-color: #fff;
-   
-    margin: 0 20px 0 10px;
     border-radius: 8px;
     border: 1px solid rgb(196, 196, 196);
+    width: 50%;
+    height: fit-content;
 }
 
-
-
-.fullName{
+.fullName {
     padding: 10px;
-    font-size: 20px;
     text-transform: uppercase;
     color: black;
     font-weight: 300;
-    
+    text-align: left;
+    width: 100%;
 }
 
+.status {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px;
+    font-size: 25px;
+}
 
-.userPic{
-    max-height: 200px;
-    max-width: 200px;
-    margin-top: -100px ;
-    border: 4px solid rgba(239, 239, 239);
+.nameAndStatus {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    width: 50%;
+    font-size: 30px;
+}
+
+.nameAndStatus input {
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+/*======================================================MAIN PHOTO========================================================*/
+
+.mainPhoto {
+    height: fit-content;
+    width: 200px;
+    margin-top: -100px;
+    outline: 4px solid rgba(239, 239, 239);
     border-radius: 50%;
-
 }
 
-.ownerUserPic{
-    max-width: 200px;
-    max-height: 200px;
-    margin-top: -100px ;
+.ownerMainPhoto {
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
     border-radius: 50%;
     transition: filter 200ms ease-in-out;
 }
 
-
-
-
-.ownerUserPic:hover{
+.ownerMainPhoto:hover {
     transition-property: filter;
-    border: 4px solid rgba(0, 0, 0, 0.521);
+    outline: 6px solid rgba(0, 0, 0, 0.521);
     cursor: pointer;
     filter: brightness(0.7);
 }
 
-
-.ownerUserPic:active{
-    max-height: 195px; 
-    border: 6px solid rgba(0, 0, 0, 0.459);
-}
-.aboutMe{
-    font-style: italic;
-    padding: 10px;
-    width: 100%;
-
-    
-   
-}
-.socials{
-    padding: 0 0 0 10px;
+.ownerMainPhoto:active {
+    outline: 1px solid rgba(0, 0, 0, 0.459);
 }
 
-
-.contacts{
-    display: flex;
-    height: 40px; 
-    width: 100%;
-    align-items: flex-end;
-    padding: 0 0 0 10px;
-
-
-}
-
-
-.status{
-    cursor: pointer;
-    width: 270px;
-    overflow: hidden;
-}
-.location{
-    width: 100%;
-
-}
-.locationIcon{
-    width: 15px;
-    height: 15px;
-    padding: 0 0 0 10px;
-}
-.iconsBox{
-    width: 30px;
-
-}
-
-.icons{
-    width: 20px;
-    padding: 5px;
-
-}
-
-.iconsHover{
-    width: 25px;
-    padding: 3px;
-}
-
-.nameAndStatus{ 
-
-}
-
-.imageBox{
+.mainPhotoContainer {
     display: flex;
     flex-direction: column;
-    max-width: 200px;
-    height: 125px;
-    margin: 0 0 15px 0;
+    justify-content: space-between;
+    width: 200px;
+    height: 150px;
+    margin: 15px;
 }
 
-
+.uploadPhotoLabelContainer {
+    margin: 20px 0 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 #uploadPhoto {
     opacity: 0;
-    margin: -20px 0 0 0;
+    margin: -25px 0 0 0;
     z-index: -1;
- }
+    width: 100%;
+}
 
- #uploadPhotoLabel{
+#uploadPhotoLabel {
     background-color: rgb(5, 85, 206);
     border-radius: 8px;
-    padding: 5px;
-    margin: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
- }
+    max-width: 100%;
+    padding: 5px;
+    height: fit-content;
+}
 
- label:hover{
+label:hover {
     filter: brightness(1.2);
- }
+}
+/*======================================================MAIN PHOTO========================================================*/
+
+/*======================================================USER INFROMATION==================================================*/
+.info {
+    margin: 10px;
+    font-size: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutMe {
+    padding: 10px;
+    max-width: 100%;
+}
+
+.location {
+    max-width: 100%;
+}
+.locationIcon {
+    width: 20px;
+    height: 20px;
+    padding: 0 0 0 10px;
+}
+
+.contactsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.contactsContainer img {
+    width: 40px;
+    height: 40px;
+}
+
+.contactsContainer img:hover {
+    width: 50px;
+    height: 50px;
+}
+
+.iconContainer {
+    width: 60px;
+    margin: 0 5px;
+}
+
+.icon {
+    width: 100%;
+    display: flex;
+    margin: auto;
+}
+
+/*======================================================USER INFROMATION==================================================*/
+
+@media (max-width: 1130px) {
+    .wrapper {
+        width: 100%;
+        justify-content: space-evenly;
+        height: fit-content;
+    }
+    .fullName {
+        text-align: left;
+    }
+    .status div {
+        width: 100%;
+        text-align: left;
+    }
+    .nameAndStatus {
+        width: 30%;
+    }
+    .info {
+        width: 30%;
+    }
+    .mainPhoto {
+        outline: none;
+    }
+    .ownerMainPhoto:hover {
+        outline: none;
+    }
+    .ownerMainPhoto:active {
+        outline: none;
+    }
+}
+
+@media (max-width: 890px) {
+    .ownerMainPhoto,
+    .mainPhoto {
+        width: 200px;
+        height: 200px;
+        margin: 30px auto;
+    }
+    .mainPhotoContainer {
+        margin: -100px auto 0;
+        width: 100%;
+        height: 300px;
+    }
+    .uploadPhotoLabelContainer {
+        margin: 0px;
+    }
+
+    .nameAndStatus {
+        width: 100%;
+    }
+    .fullName {
+        font-size: 40px;
+        width: 100%;
+        text-align: center;
+    }
+    .status div {
+        font-size: 35px;
+        width: 100%;
+        text-align: center;
+    }
+    .location {
+        font-size: 35px;
+    }
+    .locationIcon {
+        width: 25px;
+        height: 25px;
+    }
+    .aboutMe {
+        font-size: 30px;
+    }
+
+    .contacts {
+        width: 100%;
+    }
+    .info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 450px) {
+    .ownerMainPhoto,
+    .mainPhoto {
+        width: 190px;
+        height: 190px;
+        margin: 10px auto;
+    }
+    .mainPhotoContainer {
+        height: 240px;
+    }
+    .fullName {
+        font-size: 25px;
+    }
+    .status div {
+        font-size: 20px;
+    }
+    .location {
+        font-size: 20px;
+    }
+    .locationIcon {
+        width: 15px;
+        height: 15px;
+    }
+    .aboutMe {
+        font-size: 20px;
+    }
+    .contactsContainer img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .contactsContainer img:hover {
+        width: 30px;
+        height: 30px;
+    }
+
+    .iconContainer {
+        width: 30px;
+    }
+}

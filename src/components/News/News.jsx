@@ -1,12 +1,73 @@
 import classes from "./News.module.css";
+import Preloader from "../Common/Preloader";
 
-const News = () => {
-    return (
-        <div>
-            <img className={classes.newsPic} src="https://www.wvnstv.com/wp-content/uploads/sites/76/2020/08/BREAKING-NEWS-GENERIC-1.jpg" alt="" />
-           <p>Somebody's gonna be a developer, huh?</p> 
+/*
+const News = (props) => {
+    return (<>
+        <div className={classes.wrapper}>
+            {props.news.map((item, index) => Array.from(item).map(i => {
+
+                let trimmedDescription;
+                let readMore = <div>Read more</div>
+
+            if (i.description) {
+                if (i.description.length > 140) {
+                    trimmedDescription = i.description.slice(0, 141) + '...';
+                }
+            }
+                              
+                let refElement = props.news.length === index + 1;
+                
+                return <div className={classes.itemContainer} key={i.id}>
+                    <div ref={refElement ? props.lastUserElementRef : undefined} className={classes.itemImageContainer}>
+                       <a href={i.url}> <img className={classes.itemImage} src={i.image} alt="" /></a>
+                    </div>
+                    <a href={i.url}>  <div className={classes.itemTitle}>{i.title}</div> </a>
+                    <div className={classes.itemDescription}>{trimmedDescription || i.description}
+                        {trimmedDescription &&  <a href={i.url}> <div className={classes.readMore}>Read more</div></a>}
+                    </div>
+                </div>
+            }))}
         </div>
+        {props.isFetching && <Preloader />}
+        </>
     )
 }
 
-export default News;
+
+export default News; */
+
+
+const News = (props) => {
+    
+    return <>
+            <div className={classes.wrapper}>
+                {props.news.map((item, index) => Array.from(item).filter(item => item.image !== 'None').map(i => {
+                    console.log(i);
+                    let trimmedDescription;
+    
+                if (i.description) {
+                    if (i.description.length > 140) {
+                        trimmedDescription = i.description.slice(0, 141) + '...';
+                    }
+                }
+                         
+                    let refElement = props.news.length === index + 1;
+                    
+                    return <div className={classes.itemContainer} key={i.id}>
+                        <div ref={refElement ? props.lastUserElementRef : undefined} className={classes.itemImageContainer}>
+                           <a href={i.url}> <img className={classes.itemImage} src={i.image} alt="" /></a>
+                        </div>
+                        <a href={i.url}>  <div className={classes.itemTitle}>{i.title}</div> </a>
+                        <div className={classes.itemDescription}>{trimmedDescription || i.description}
+                            {trimmedDescription &&  <a href={i.url}> <div className={classes.readMore}>Read more</div></a>}
+                        </div>
+                    </div>
+                }))}
+            {props.isFetching && <div className={classes.preloader}><Preloader /></div>}
+            </div>
+            </>
+    }
+    
+    
+    export default News;

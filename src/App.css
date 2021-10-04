@@ -8,30 +8,53 @@ body{
   grid-template-areas: 
   "h h"
   "n c";
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
   min-height: 100vh;
+
 }
 
 .initial-app-wrapper{ 
-    margin: 0 auto;
-    max-width: 1200px;
-    display: grid;
-    grid-template-areas: 
-    "h"
-    "c";
-    height: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-areas: 
+  "h"
+  "c";
+  height: 100%;
 }
 
 .app-wrapper-content{
-  grid-area: c;
-  min-height: 92vh;
+grid-area: c;
+height: 100%;
 }
 
 .app-navbar{
-  position: sticky;
-  top: 65px;
-  height: 90vh;
+position: sticky;
+top: 60px;
+height: fit-content;
+}
+
+
+
+
+@media (max-width:1130px) {
+  .app-wrapper{
+    grid-template-areas: 
+    "h h"
+    "c c";
+  }
+  .app-wrapper-content{
+    margin: 0 20px;
+  }
+}
+
+@media (max-width:890px) {
+  .app-wrapper{
+    grid-template-areas: 
+    "h h"
+    "c c";
+  }
 }
 

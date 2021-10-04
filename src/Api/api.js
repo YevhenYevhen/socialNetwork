@@ -82,6 +82,19 @@ export const securityAPI = {
 }
 
 
+const news = axios.create({
+    baseURL: 'https://api.currentsapi.services/v1/'
+})
+
+
+export const newsAPI = {
+    getNews() {
+        return news.get('latest-news?apiKey=9n6IQGitws7rrEQJwB8qTHhuuXPp87quwmxrY8Kgwi-W8Wgf')
+    },
+    getOlderNews(pageNumber) {
+        return news.get(`search?page_number=${pageNumber}&apiKey=9n6IQGitws7rrEQJwB8qTHhuuXPp87quwmxrY8Kgwi-W8Wgf`)
+    }
+}
 
 
 

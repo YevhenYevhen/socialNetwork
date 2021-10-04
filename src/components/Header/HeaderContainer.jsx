@@ -25,7 +25,10 @@ class HeaderContainer extends React.Component {
     }
 
     render() {
-        return <Header {...this.props} />
+        
+        if (this.props.isAuth) {
+            return <Header {...this.props} />
+        } else return null;
     }
 }
 

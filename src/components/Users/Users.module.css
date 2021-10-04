@@ -1,13 +1,13 @@
-.container{
+.container {
     display: flex;
-    width: 900px;
+    width: 100%;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 0 auto;
     margin-top: 10px;
 }
 
-.user{
+.user {
     border: 1px solid rgba(0, 0, 0, 0.178);
     text-align: center;
     width: 200px;
@@ -18,102 +18,41 @@
     overflow: hidden;
     margin: 10px 10px 10px 10px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
-@media (max-width:1155px) {
-    .user{
-        justify-content: space-between;
-        min-width: 250px;
-        min-height: 350px;
-        max-width: 250px;
-        
-    }
-    
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
 }
 
-
-
-@media (max-width:1090px) {
-    .user{
-        justify-content: space-between;
-        min-width: 500px;
-        min-height: 650px;
-        max-width:650px;
-        margin: 30px auto;
-        justify-content: center;
-        
-    }
-    
-}
-
-.photo{
-    padding: 10px;
-    width: 150px;
-    border-radius: 50%;
-}
-
-
-@media (max-width:1155px) {
-    .photo{
-        width: 200px;
-    }
-    
-}
-
-
-@media (max-width:1090px) {
-    .photo{
-        padding: 10px;
-        width: 400px;
-    }
-    
-}
-
-
-.button{
- width: 170px;
- height: 50px;
- margin: 10px;
- border-radius: 10px;
- background-color: rgba(2, 63, 155, 0.74);
- color: white;
- font-size: 20px;
-}
-
-.disabledButton{
-    width: 170px;
-    height: 50px;
-    margin: 10px;
-    border-radius: 10px;
+.button {
+    width: 80%;
+    height: 35px;
+    border-radius: 8px;
+    background-color: rgba(2, 63, 155, 0.74);
     color: white;
+    font-size: 15px;
+}
+
+.disabledButton {
+    width: 80%;
+    height: 35px;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    filter: brightness(0.5);
+}
+
+.status {
     font-size: 20px;
-    background-color: rgba(141, 141, 141, 0.233);
+    overflow: clip;
+    margin: 0 10px;
 }
 
-@media (max-width:1155px) {
-    .button{
-        width: 220px;
-        height: 60px;
-        margin: 10px;
-        font-size: 30px;
-       }
-    
-}
-
-
-@media (max-width:1090px) {
-    .button{
-        width: 420px;
-        height: 90px;
-        margin: 10px;
-        font-size: 30px;
-       }
-    
-}
-
-
-.name{
+.name {
     font-size: 20px;
     font-weight: 500;
     color: rgb(0, 0, 0);
@@ -121,23 +60,28 @@
     overflow: clip;
 }
 
-@media (max-width:1155px) {
-    .name{
-        font-size: 30px;
-    }
-    
+.photo {
+    padding: 10px;
+    width: 150px;
+    border-radius: 50%;
 }
 
-
-@media (max-width:1090px) {
-    .name{
-        font-size: 40px;
+@media (max-width: 710px) {
+    .user {
+        width: 40%;
+        height: 350px;
     }
-    
 }
 
-.status{
-    font-size: 20px;
-    overflow: clip;
-    margin: 0 10px;
+@media (max-width: 550px) {
+    .user {
+        width: 80%;
+        height: 100%;
+    }
+    .photo {
+        padding: 10px;
+        width: 60%;
+        border-radius: 50%;
+    }
+    
 }

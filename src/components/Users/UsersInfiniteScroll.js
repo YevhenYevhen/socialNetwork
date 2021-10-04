@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress} from "../../redux/usersReducer";
 import User from "./User";
 
@@ -13,7 +15,7 @@ function UsersInfiniteScroll(props) {
       props.resetUsers()
   }, [])
 
-  useEffect(async () => {
+  useEffect(() => {
     props.getUsers(pageNumber)
   }, [pageNumber])
 
@@ -34,7 +36,8 @@ function UsersInfiniteScroll(props) {
     if (node) observer.current.observe(node)
   }, [props.isFetching, hasMore])
 
-  
+
+
   return (
     
     <User users={props.users}
@@ -58,7 +61,10 @@ const mapStateToProps = (state) => ({
   isFollowingInProgress: state.usersPage.isFollowingInProgress,
 })
 
-export default connect(mapStateToProps, {
-  resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress,
-})(UsersInfiniteScroll);
+export default compose(
+  connect(mapStateToProps,
+    { resetUsers, getUsers, follow, unfollow, toggleIsFollowingInProgress }),
+  withAuthRedirect
+)(UsersInfiniteScroll);
+
 

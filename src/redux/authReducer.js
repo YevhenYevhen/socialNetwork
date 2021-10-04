@@ -1,6 +1,7 @@
 import { authAPI, profileAPI, securityAPI } from "../Api/api";
 const SET_USER_DATA = 'auth/SET-USER-DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'auth/GET-CAPTCHA-URL-SUCCESS';
+const SET_AUTH_USER_POFILE = 'auth/SET-AUTH-USER-PROFILE';
 const SET_AUTH_USER_PHOTO = 'auth/SET-AUTH-USER-PHOTO';
 
 
@@ -13,7 +14,9 @@ let initialState = {
     isFetching: false,
     isAuth: false,
     captchaUrl: null,
+    authUserProfile: null,
     authUserPhoto: null
+
 };
 
 const authReducer = (state = initialState, action) => {
@@ -29,6 +32,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 captchaUrl: action.captchaUrl
             }
+        case SET_AUTH_USER_POFILE:
+            return {
+                ...state,
+                authUserProfile: action.profile
+            }
         case SET_AUTH_USER_PHOTO:
             return {
                 ...state,
@@ -42,9 +50,9 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })
 export const getCaptchaUrlSuccess = (captchaUrl) => ({ type: GET_CAPTCHA_URL_SUCCESS, captchaUrl })
-
-
+export const setAuthUserProfile = (profile) => ({ type: SET_AUTH_USER_POFILE, profile })
 export const setAuthUserPhoto = (photo) => ({ type: SET_AUTH_USER_PHOTO, photo })
+
 
 
 
@@ -62,24 +70,22 @@ export const setAuthUserPhoto = (photo) => ({ type: SET_AUTH_USER_PHOTO, photo }
 
 
 
-export const getAuthUserData = () => (dispatch) => {
+export const getAuthUserData = () => async (dispatch) => {
 
-    return authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            let { id, email, login } = response.data.data;
-            dispatch(setAuthUserData(id, email, login, true));
+    let response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let { id, email, login } = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+        let authUserId = response.data.data.id;
+        let authUser = await profileAPI.getProfile(authUserId);
+        let authUserProfile = authUser.data;
+        let authUserPhoto = authUser.data.photos.large;
+        dispatch(setAuthUserProfile(authUserProfile));
+        dispatch(setAuthUserPhoto(authUserPhoto))
+    }
 
-        }
-    })
 }
 
-export const getAuthUserPhoto = () => async (dispatch) => {
-    let response = await authAPI.me();
-    let authUserId = response.data.data.id;
-    let authUser = await profileAPI.getProfile(authUserId);
-    let authUserPhoto = authUser.data.photos.small;
-    dispatch(setAuthUserPhoto(authUserPhoto));
-}
 
 
 export const login = (email, password, captcha) => async (dispatch) => {
@@ -109,10 +115,10 @@ export const logout = () => async (dispatch) => {
     let response = await authAPI.logout();
     if (response.data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false));
+        dispatch(setAuthUserProfile(null));
         dispatch(setAuthUserPhoto(null));
     }
 }
-
 
 export default authReducer;
 

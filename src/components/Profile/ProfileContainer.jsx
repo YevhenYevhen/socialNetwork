@@ -1,14 +1,10 @@
 import React from 'react';
 import Profile from './Profile';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { getUserProfile, getUserStatus, updateStatus, saveNewMainPic, saveProfile } from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
-import { usersAPI } from '../../Api/api';
-import { Redirect } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import { getAuthUserPhoto } from '../../redux/authReducer';
 
 
 class ProfileContainer extends React.Component {
@@ -20,7 +16,6 @@ class ProfileContainer extends React.Component {
     }
     this.props.getUserProfile(userId);
     this.props.getUserStatus(userId);        
-    this.props.getAuthUserPhoto();
   }
 
   componentDidMount() {
@@ -41,7 +36,7 @@ class ProfileContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params.userId != prevProps.match.params.userId) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.refreshComponent();
       
     }
@@ -83,7 +78,7 @@ let withUrlContainer = withRouter(AuthRedirectComponent);
 export default connect (mapStateToProps, {getUserProfile})(withUrlContainer); */
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, saveNewMainPic, saveProfile, getAuthUserPhoto }),
+  connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, saveNewMainPic, saveProfile }),
   withRouter,
   withAuthRedirect
 )(ProfileContainer);

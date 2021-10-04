@@ -1,17 +1,5 @@
-.postsBlock{
-    margin: 10px 0 0 10px;
-  
-    
-}
-
-.posts{
-    padding: 10px 0;
-    border-radius: 8px;
-    
-    
-}
-
-.postsHeader{
+.postInputBlock {
+    border: 2px solid blue;
     padding: 10px;
     background-color: #fff;
     border-radius: 8px;
@@ -19,11 +7,19 @@
     border: 1px solid rgb(196, 196, 196);
 }
 
-textarea{
-resize: none;
+.posts {
+    padding: 10px 0;
+    border-radius: 8px;
 }
 
-.submitButton{
+.postTextarea {
+    resize: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.submitButton {
     background-color: rgb(5, 85, 206);
     border-radius: 8px;
     padding: 5px;
@@ -32,9 +28,9 @@ resize: none;
     align-items: center;
     justify-content: center;
     color: #fff;
-    width: 100px;
+    width: 50px;
 }
 
-.submitButton:hover{
+.submitButton:hover {
     filter: brightness(1.2);
- }
+}

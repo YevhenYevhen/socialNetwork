@@ -6,12 +6,13 @@ import classes from './MyPosts.module.css';
 
 
 export const PostInput = (props) => {
+  
   const onSubmit = (e) => {
     if (e.post) {
       props.addPost(e.post);
     }
-      e.post = '';
-    }
+    e.post = '';
+  }
 
   return <Form
     onSubmit={onSubmit}
@@ -21,11 +22,8 @@ export const PostInput = (props) => {
           name="post"
           render={({ input, meta }) => (
             <div>
-              {/* <label>Enter your message</label> */}
-              <textarea placeholder='Enter your post' rows="5" cols="110" {...input} />
-              {/* {meta.touched && meta.error && <span>{meta.error}</span>} */}
+              <textarea className={classes.postTextarea} placeholder='Enter your post'  {...input} />
             </div>
-            
           )}
         />
         <button className={classes.submitButton} type="submit">Post</button>
@@ -35,24 +33,20 @@ export const PostInput = (props) => {
 }
 
 
-let mapStateToProps = (state) => {
-    return {
-  
-    }
+
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: (postData) => {
+      let action = addPostActionCreator(postData);
+      dispatch(action);
+    },
   }
-  
-  let mapDispatchToProps = (dispatch) => {
-    return {
-      addPost: (postData) => {
-        let action = addPostActionCreator(postData);
-        dispatch(action);
-      },
-    }
-  }
-  
-  
-  
-  let PostInputContainer = connect(mapStateToProps, mapDispatchToProps)(PostInput); 
-  
-  
+}
+
+
+
+let PostInputContainer = connect(null, mapDispatchToProps)(PostInput);
+
+
 export default PostInputContainer;

@@ -1,33 +1,149 @@
 .wrapper{
     width: 45%;
-    max-height: 400px;
     background-color: #fff;
     border-radius: 8px;
     border: 1px solid rgb(196, 196, 196);
+    display: flex;
+    flex-direction: column;
 }
+
 .title{
     font-size: 20px;
-    margin: 0 0 0 80px;
+    margin: 10px 0 0 40px;
+}
+/*=============================================FRIEND=================================================================*/
 
-}
-
-.friendPhoto{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-.friendName{
-    text-align: center;
-}
-.friendsBox{
+.friendsContainer{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 auto;
-    width: 400px;
-    
+    justify-content: space-evenly;
+    margin: auto;
+    width: 100%; 
 }
 
 .friend{
-    margin: 30px;
+    margin: 20px;
+    width: fit-content;
+}
+
+.friendPhoto{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.friendName{
+    text-align: center;
+}
+
+/*=============================================FRIEND=================================================================*/
+
+
+@media (max-width:1130px) {
+    .wrapper{
+        width: 100%;
+        margin: 20px 0 0 0;
+    }
+    .friend{
+        margin: 10px;
+    }
+    .friendPhoto{
+        width: 90px;
+        height: 90px;
+    }
+    .friendName{
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+
+@media (max-width:880px) {
+    .wrapper{
+        width: 100%;
+    }
+    .friendPhoto{
+        width: 90px;
+        height: 90px;
+        padding: 5px;
+        margin: auto;
+    }
+    .friend{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100px;
+        flex-wrap: wrap;
+    }
+
+    .friendName{
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+@media (max-width:765px) {
+    .wrapper{
+        width: 100%;
+        padding: 0 10%;
+        margin: 20px 0 0;
+        justify-content: space-evenly;
+    }
+
+    .friendPhoto{
+        width: 90px;
+        height: 90px;
+        margin: auto;
+    }
+    .friend{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 30%;
+ 
+    }
+}
+
+
+
+@media (max-width:500px) {
+    .wrapper{
+        width: 100%;
+        padding: 0 5%;
+        margin: 20px 0 0;
+        justify-content: space-around;
+    }
+
+    .friendPhoto{
+        width: 50%;
+        height: 50%;
+        margin: auto;
+    }
+    .friend{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 15px;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+
+
+
+@media (max-width:310px) {
+    .friendPhoto{
+        width: 70%;
+        height: 70%;
+    }
+    .friend{
+        height: 70px;
+        width: 70px;
+        padding: 0 0 10px 0;
+    }
 }

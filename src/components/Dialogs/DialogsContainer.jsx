@@ -1,7 +1,6 @@
-import { onMessageChangeActionCreator, sendMessageActionCreator } from './../../redux/dialogsReducer';
+import { sendMessageActionCreator } from './../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 //import StoreContext from '../../StoreContext';
@@ -40,6 +39,7 @@ import { compose } from 'redux';
 let mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
+        authUserPhoto: state.auth.authUserPhoto
     }
 }
 

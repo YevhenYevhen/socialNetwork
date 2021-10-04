@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
-import Music from './components/Music/Music';
+import NewsInfiniteScroll from './components/News/NewsInfiniteScroll';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router';
 import Login from './components/Login/Login';
@@ -33,32 +32,21 @@ class App extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
   }
-
+  
   render() {
     if (!this.props.initialized) {
       return <Preloader />
     }
     return (
       <div className={this.props.isAuth ? 'app-wrapper' : 'initial-app-wrapper' }>
-        <HeaderContainer />
+        {this.props.isAuth && <HeaderContainer />}
         <div className='app-wrapper-content'>
           <Switch>
             <Route exact path='/' render={withSuspense(ProfileContainer)} />
-            {/* <Route path='/dialogs' render={() => {
-            return <Suspense fallback={<Preloader />}>
-              <DialogsContainer />
-            </Suspense>
-          }} />  */}
             <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
-            {/*           <Route path='/profile/:userId?' render={() => {
-            return <Suspense fallback={<Preloader />}>
-              <ProfileContainer />
-              </Suspense>}} /> */}
             <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
-            <Route path='/news' render={() => <News />} />
-            <Route path='/music' render={() => <Music />} />
+            <Route path='/news' render={() => <NewsInfiniteScroll />} />
             <Route path='/settings' render={() => <Settings />} />
-            {/*  <Route path='/users' render={() => <UsersContainer />} /> */}
             <Route path='/users' render={() => <UsersInfiniteScroll />} />
             <Route path='/login/facebook' render={() => <div>Facebook Login</div>} />
             <Route path='/login' render={() => <Login />} />

@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../redux/authReducer';
 import classes from './Login.module.css';
 import logoIcon from '../../assets/icons/logo.png'
-
-
+import Preloader from '../Common/Preloader';
 
 
 export const Login = (props) => {
+    const [error, setError] = useState(null)
+    const [isFetching, setIsFetching] = useState(false)
+
     const onSubmit = (e) => {
-        props.login(e.email, e.password, e.captcha)
+        setIsFetching(true)
+        props.login(e.email, e.password, e.captcha).then((error) => {
+            if (error) {
+                setError(error)
+                setIsFetching(false)
+            } else {
+                setIsFetching(false)
+            }
+            
+        })
     }
     const validate = (e) => {
         const errors = {};
@@ -27,23 +38,25 @@ export const Login = (props) => {
         return <Redirect to={'/profile'}/>
     }
     
+
+
     return (<div className={classes.wrapper}>
-        <div className={classes.logo}>
-            <img src={logoIcon} alt="" />
-            <div>Social Network</div> 
+        <div className={classes.logoContainer}>
+            <img className={classes.logoImage} src={logoIcon} alt="" />
+            <div className={classes.logoTitle}>Social Network</div> 
         </div>
-        <div className={classes.input}>
+        <div className={classes.formContainer}>
         <Form
             onSubmit={onSubmit}
             validate={validate}
             render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
+                <form className={classes.loginForm} onSubmit={handleSubmit}>
                     <Field
                         name="email"
                         render={({ input, meta }) => (
                             <div className={classes.field}>
                                 <label>Email</label>
-                                <input {...input} placeholder='Email'/>
+                                <input className={classes.input} {...input} placeholder='Email'/>
                                 {meta.touched && meta.error && <span className={classes.error}>{meta.error}</span>}
                             </div>
                         )}
@@ -53,28 +66,30 @@ export const Login = (props) => {
                         render={({ input, meta }) => (
                             <div className={classes.field}>
                                 <label>Password</label>
-                                <input {...input} placeholder='Password' type='password'/>
+                                <input className={classes.input} {...input} placeholder='Password' type='password'/>
                                 {meta.touched && meta.error && <span className={classes.error}>{meta.error}</span>}
                             </div>
                         )}
                     />
                     
-                    {props.captchaUrl && <img src={props.captchaUrl}></img>}
+                    {props.captchaUrl && <img src={props.captchaUrl} alt=''></img>}
                     {props.captchaUrl &&
                         <Field
                         name="captcha"
                         render={({ input, meta }) => (
                             <div className={classes.field}>
                                 <label>Enter the symbols...</label>
-                                <input {...input}/>
+                                <input className={classes.input} {...input}/>
                                 {meta.touched && meta.error && <span className={classes.error}>{meta.error}</span>}
                             </div>
                         )}
                     />}
                     
                     <div className={classes.buttonContainer}>
-                        <button className={classes.submitButton} type="submit">Log in</button>
+                        <button disabled={isFetching} className={isFetching ? classes.disabledButton : classes.submitButton} type="submit">Log in</button>
                     </div>
+                    {isFetching && <Preloader></Preloader>}
+                    {error && <div className={classes.error}>{error}</div>}
                 </form>
             )} />
         </div>

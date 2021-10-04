@@ -1,60 +1,19 @@
 import React from 'react';
 import classes from './Header.module.css';
-import { NavLink } from 'react-router-dom';
-import logo from './../../assets/images/logo.png'
-import userPic from './../../assets/images/user.png'
 import { useState } from 'react';
 import { useEffect, useRef } from 'react';
-import Preloader from '../Common/Preloader';
 import { ReactComponent as Caret } from '../../assets/icons/caret.svg';
 import logoIcon from '../../assets/icons/logo.png'
-/* const Header = (props) => {
-
-    const [goingToLogout, setGoingToLogout] = useState(false)
-
-
-
-    
-    return <header className={classes.header}>
-        <div className={classes.logoBox}>
-            <img className={classes.logo} src={logo} />
-            <div className={classes.title}>Social Network</div>
-        </div>
-
-        <div>
-            {props.isAuth ? <>
-
-                <div className={classes.loginBlock}>
-                    {goingToLogout ? <>
-                        <div>
-                           
-                            <button onClick={props.logout}>Log out</button>
-                            
-                        </div>
-
-                    </> :
-                        <><img className={classes.userIcon} src={props.authUserPhoto} />
-                            <span className={classes.login}>{props.login}</span> 
-                        <span onClick={() => setGoingToLogout(true)} id={classes.triangle}>&#9662;</span>
-                        </>
-                    }
-                </div>
-
-            </>
-                : <NavLink to={'/login'}><button>Login</button></NavLink>}
-        </div>
-    </header>
-    ;
-}
-
-export default Header;
-
- */
+import { NavLink } from 'react-router-dom';
+import { useWindowWidth } from '../Common/useWindowWidth';
+import userPic from '../../assets/images/user.png'
 
 
 const Header = (props) => {
     const [open, setOpen] = useState(false)
     const node = useRef()
+    const windowWidth = useWindowWidth();
+
 
     const handleClickOutside = e => {
         console.log("clicking anywhere");
@@ -76,18 +35,24 @@ const Header = (props) => {
         return () => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [open]);
+    }, [open]);
+    
 
     const Navbar = (props) => {
-        
         return (
             <nav className={classes.navbar}>
-                <div className={classes.title}><img className={classes.logoIcon} src={logoIcon} alt="" />Social Network</div>
+                 <NavLink to='/profile'>
+                <div className={classes.title}>
+                    <img className={classes.logoIcon} src={logoIcon} alt="" />
+                    <span>Social Network</span>
+                </div>
+                </NavLink>
                 <ul className={classes.nav}>
                     <div className={classes.login}>{props.login}</div>
                     <div className={classes.photoContainer}>
-                        {props.authUserPhoto && 
-                        <img className={classes.authUserPhoto} src={props.authUserPhoto} alt="" />}
+                            <NavLink to='/profile'>
+                                <img className={classes.authUserPhoto} src={props.authUserPhoto || userPic} alt="" />
+                            </NavLink>
                     </div>
                     {props.children}
                 </ul>
@@ -98,7 +63,7 @@ const Header = (props) => {
     const NavItem = (props) => {
         return (
             <li className={classes.navItem}>
-                <a href="#" className={classes.button} onClick={() => setOpen(!open)}>{props.icon}</a>
+                <div className={classes.button} onClick={() => setOpen(!open)}>{props.icon}</div>
                 {open && props.children}
             </li>
         )
@@ -110,23 +75,35 @@ const Header = (props) => {
             props.logout()
             setOpen(false);
         }
+        const close = () => {
+            setOpen(false);
+        }
+
+
         const DropDownItem = (props) => {
-            
             return (
-                <a ref={node} onClick={props.logout} href='#' className={classes.menuItem}>
-                    <span className={classes.leftIcon}>{props.leftIcon}</span>
-                   <div >{props.children}</div> 
-                    <span className={classes.rightIcon}>{props.rightIcon}</span>
-                </a>
+                <div onClick={props.logout || props.close}  className={classes.menuItem}>
+                    <span className={classes.leftIcon}>{props.leftIcon}</span> {/* in case an icon is needed */}
+                   <div className={classes.navlink}>{props.children}</div> 
+                    <span className={classes.rightIcon}>{props.rightIcon}</span> {/* in case an icon is needed */}
+                </div>
             )
         }
-    
+
         return (
-            <div className={classes.dropdown}>
+            <div ref={node} className={classes.dropdown}>
+               {windowWidth < 1130 &&  <>
+                <DropDownItem close={close}><NavLink to='/profile'>Profile</NavLink></DropDownItem>
+                <DropDownItem close={close}><NavLink to='/dialogs'>Dialogs</NavLink></DropDownItem>
+                <DropDownItem close={close}><NavLink to='/news'>News</NavLink></DropDownItem>
+                <DropDownItem close={close}><NavLink to='/settings'>Settings</NavLink></DropDownItem>
+                <DropDownItem close={close}><NavLink to='/users'>Find Users</NavLink></DropDownItem>
+                </>}
                 <DropDownItem logout={logoutAndClose}>Log out</DropDownItem>
             </div>
         )
     }
+
     
     if (props.isAuth) {
         return (

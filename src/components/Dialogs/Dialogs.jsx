@@ -1,53 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classes from './Dialogs.module.css';
-import { NavLink, Redirect } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-//import { updateNewMessageData } from '../../redux/state';
-import { onMessageChangeActionCreator, sendMessageActionCreator } from './../../redux/dialogsReducer';
-import MessageInputContainer from './MessageInput';
-
+import DialogsFormContainer from './DialogsForm';
+import { useWindowWidth } from '../Common/useWindowWidth'
 
 
 const Dialogs = (props) => {
-    let dialogsElements = props.dialogsPage.dialogsData.map((dialog) => <DialogItem name={dialog.name} id={dialog.id} />);
-    let messagesElements = props.dialogsPage.messagesData.map((message) => <Message text={message.text} />);
-    let newMessageData = props.dialogsPage.newMessageData;
 
-    let newMessageElement = React.createRef();
-    let sendMessage = () => {
-        props.sendMessage();
-/*         let messageText = newMessageElement.current.value;
-        props.dispatch(sendMessageActionCreator());
-        newMessageElement.current.value = ''; */
+    const AlwaysScrollToBottom = () => {
+        const elementRef = useRef();
+        useEffect(() => elementRef.current.scrollIntoView());
+        return <div ref={elementRef} />;
+    };
+    const windowWidth = useWindowWidth();
+
+    const [messageMode, setMessageMode] = useState(false)
+    const messages = props.dialogsPage.messagesData.slice().reverse();
+
+    const dialogsElements = props.dialogsPage.dialogsData.map(dialog => <DialogItem
+        setMessageMode={setMessageMode} messages={messages}
+        name={dialog.name} key={dialog.id} id={dialog.id} photo={dialog.photo} />);
+    const messagesElements = props.dialogsPage.messagesData.map(message => <Message key={message.id}
+        authUserPhoto={props.authUserPhoto} text={message.text} />);
 
 
-    }
-   /*  let onMessageChange = () => {
-        let messageText = newMessageElement.current.value;
-        props.updateNewMessageData(messageText);
-         props.dispatch(onMessageChangeActionCreator(messageText)); 
-    }
- */
 
-   /*  if (!props.isAuth) return <Redirect to={'/login'} />
- */
-    return (
-         
-        <div className={classes.dialogs}>
-            <div className={classes.dialogsItems}>
-                {dialogsElements}
+    if (windowWidth < 700)
+        return (<>
+            <div className={classes.wrapper}>
+            {messageMode && <div className={classes.back} onClick={() => setMessageMode(false)}><span> &larr; Back</span></div>}
+                {!messageMode && <div className={classes.dialogsContainer}>
+                    {dialogsElements}
+                </div>}
+                {messageMode && <>
+                    <div className={classes.messagesContainer}>
+                        {messagesElements}
+                        <AlwaysScrollToBottom />
+                    </div>
+                    <div className={classes.formContainer}>
+                        <DialogsFormContainer sendMessage={props.sendMessage} />
+                    </div>
+                </>
+                }
             </div>
-            <div className={classes.messages}>
-                {messagesElements}
-               {/*  <textarea placeholder='Enter your message' value={newMessageData} onChange={onMessageChange} ref={newMessageElement} className={classes.messageInputArea}></textarea> */}
-                <div><MessageInputContainer sendMessage={props.sendMessage} /></div>
-{/*                 <div>
-                    <button onClick={sendMessage}>Send</button>
-                </div> */}
+        </>
+        )
+    if (windowWidth > 700)
+        return (
+            <div className={classes.wrapper}>
+                <div className={classes.dialogsContainer}>
+                    {dialogsElements}
+                </div>
+                <div className={classes.messagesContainer}>
+                    {messagesElements}
+                    <AlwaysScrollToBottom />
+                </div>
+                <div className={classes.formContainer}>
+                    <DialogsFormContainer sendMessage={props.sendMessage} />
+                </div>
             </div>
-        </div>
-    )
+        )
 }
 
 

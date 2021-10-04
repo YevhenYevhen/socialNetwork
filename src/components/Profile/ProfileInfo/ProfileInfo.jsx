@@ -4,16 +4,11 @@ import Preloader from '../../Common/Preloader';
 import ProfileStatusWithHooks from './../ProfileStatusWithHooks';
 import userPic from './../../../assets/images/user.png'
 import { useEffect, useRef } from 'react';
-import ProfileDataForm from '../ProfileDataForm';
-import updateIcon from './../../../assets/images/update-icon.png';
-import { span } from 'prelude-ls';
-import { NavLink } from 'react-router-dom';
 import locationIcon from './../../../assets/icons/location.png'
 
 const ProfileInfo = (props) => {
 
   const node = useRef()
-  let [editMode, setEditMode] = useState(false);
   let [updatePictureMode, setUpdatePictureMode] = useState(false);
 
   useEffect(() => {
@@ -56,24 +51,20 @@ const ProfileInfo = (props) => {
     }
   }
 
-
-  
-  
-
   return (
     <div className={classes.wrapper}>
-      <div className={classes.imageBox}>
-      <img onClick={onPictureClick}
-        className={props.isOwner ? classes.ownerUserPic : classes.userPic}
-        src={props.profile.photos.large || userPic} />
+      <div className={classes.mainPhotoContainer}>
+        <img onClick={onPictureClick}
+          className={props.isOwner ? classes.ownerMainPhoto : classes.mainPhoto}
+          src={props.profile.photos.large || userPic} alt='' />
 
         {props.isOwner && updatePictureMode &&
-          <>
-          <label ref={node} id={classes.uploadPhotoLabel} for={classes.uploadPhoto}>Upload profile photo</label>
-          <input type="file" name='photo' id={classes.uploadPhoto}
-            onChange={onMainPicSelected} >
-          </input>
-          </>
+          <div className={classes.uploadPhotoLabelContainer}>
+            <label ref={node} id={classes.uploadPhotoLabel} for={classes.uploadPhoto}>Upload profile photo</label>
+            <input type="file" name='photo' id={classes.uploadPhoto}
+              onChange={onMainPicSelected} >
+            </input>
+          </div>
         }
       </div>
       <div className={classes.nameAndStatus}>
@@ -82,26 +73,22 @@ const ProfileInfo = (props) => {
         </div>
         <div className={classes.status}>
           <ProfileStatusWithHooks status={props.status}
-          updateStatus={props.updateStatus} isOwner={props.isOwner} />
+            updateStatus={props.updateStatus} isOwner={props.isOwner} />
         </div>
       </div>
-      <div className={classes.location}>
-        <div>
-          <img className={classes.locationIcon} src={locationIcon} alt="" />
-          <span>Warsaw</span>
+      <div className={classes.info}>
+        <div className={classes.location}>
+          <div>
+            <img className={classes.locationIcon} src={locationIcon} alt="" />
+            <span>Warsaw</span>
+          </div>
         </div>
+        <div className={classes.aboutMe}>
+          <div>About</div>
+          {props.profile.aboutMe}
+        </div>
+        <ProfileData profile={props.profile} isOwner={props.isOwner} />
       </div>
-      <div className={classes.aboutMe}>
-      <div>About</div>
-        {props.profile.aboutMe}
-      </div>
-
-      {editMode ?
-        <ProfileDataForm initialValues={props.profile}
-          profile={props.profile} saveProfile={props.saveProfile}
-          deactivateEditMode={() => { setEditMode(false) }} /> :
-        <ProfileData profile={props.profile} isOwner={props.isOwner}
-          activateEditMode={() => { setEditMode(true) }} />}
     </div>
   )
 }
@@ -111,38 +98,28 @@ const ProfileInfo = (props) => {
 
 const Contact = ({ contactsTitle, contactsValue }) => {
 
-  let [hoverMode, setHoverMode] = useState(false)
-
-  const toggleHoverMode = (toggle) => {
-    setHoverMode(toggle);
-  }
   switch (contactsTitle) {
     case ('facebook'):
-      return <a href={contactsValue}><img onMouseEnter={() => toggleHoverMode(true)}
-        onMouseLeave={() => toggleHoverMode(false)}
-        className={hoverMode ? classes.iconsHover : classes.icons}
-        src='https://cdn3.iconfinder.com/data/icons/capsocial-round/500/facebook-512.png' /></a>
+      return <a href={contactsValue}><img 
+        className={classes.icon}
+        src='https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Facebook_svg-128.png' alt='' /></a>
     case ('github'):
-      return <a href={contactsValue} onMouseEnter={() => toggleHoverMode(true)}
-        onMouseLeave={() => toggleHoverMode(false)}><img
-          className={hoverMode ? classes.iconsHover : classes.icons}
-          src='https://icons-for-free.com/iconfiles/png/512/part+1+github-1320568339880199515.png' /></a>
+      return <a href={contactsValue}><img
+          className={classes.icon}
+          src='https://icons-for-free.com/iconfiles/png/512/part+1+github-1320568339880199515.png' alt='' /></a>
     case ('instagram'):
-      return <a href={contactsValue} onMouseEnter={() => toggleHoverMode(true)}
-        onMouseLeave={() => toggleHoverMode(false)}><img
-          className={hoverMode ? classes.iconsHover : classes.icons}
-          src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="" /></a>
+      return <a href={contactsValue} ><img
+          className={classes.icon}
+          src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Instagram_svg-128.png" alt="" /></a>
     case ('twitter'):
-      return <a href={contactsValue} onMouseEnter={() => toggleHoverMode(true)}
-        onMouseLeave={() => toggleHoverMode(false)}><img
-          className={hoverMode ? classes.iconsHover : classes.icons}
-          src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png" alt="" /></a>
+      return <a href={contactsValue} ><img
+          className={classes.icon}
+          src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Twitter_svg-128.png" alt="" /></a>
     case ('youtube'):
-      return <a href={contactsValue} onMouseEnter={() => toggleHoverMode(true)}
-        onMouseLeave={() => toggleHoverMode(false)}><img
-          className={hoverMode ? classes.iconsHover : classes.icons}
-          src="https://cliply.co/wp-content/uploads/2019/04/371903520_SOCIAL_ICONS_YOUTUBE.png" alt="" /></a>
-
+      return <a href={contactsValue} ><img
+          className={classes.icon}
+          src="https://cdn1.iconfinder.com/data/icons/social-media-circle-7/512/Circled_Youtube_svg-128.png" alt="" /></a>
+    default: return;
 
   }
 }
@@ -154,23 +131,18 @@ const Contact = ({ contactsTitle, contactsValue }) => {
 
 
 
-const ProfileData = ({ profile, isOwner, activateEditMode }) => {
+const ProfileData = ({ profile }) => {
 
-  return <>
-    <div className={classes.socials}>Socials</div>
-    <div className={classes.contacts}>
+  return <div className={classes.contactsContainer}>
       {Object.keys(profile.contacts).filter(key => key !== 'mainLink' && key !== 'vk' && key !== 'website')
-      .map(key => {
-        if (profile.contacts[key]) {
-          return <div className={classes.iconsBox}>
-            <Contact key={key} contactsTitle={key} contactsValue={profile.contacts[key]} />
-          </div>
-        }
-      })}
-      {isOwner && <div><button onClick={activateEditMode}>Edit</button></div>}
+        .map(key => {
+          if (profile.contacts[key]) {
+            return <div key={key} className={classes.iconContainer}>
+              <Contact contactsTitle={key} contactsValue={profile.contacts[key]} />
+            </div>
+          } else return null;
+        })}
     </div>
-
-  </>
 }
 
 
