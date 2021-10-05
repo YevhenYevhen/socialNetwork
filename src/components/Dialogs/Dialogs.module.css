@@ -39,6 +39,8 @@
     overflow: hidden;
     max-width: 100%;
     margin: 3px;
+    color: #000;
+
 }
 
 .activeDialog {

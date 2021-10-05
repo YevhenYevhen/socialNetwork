@@ -1,4 +1,5 @@
 import { profileAPI, usersAPI } from "../Api/api";
+import { setAuthUserPhoto } from "./authReducer";
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_STATUS = 'profile/SET-USER-STATUS';
@@ -95,6 +96,7 @@ export const saveNewMainPic = (file) => async (dispatch) => {
     let response = await profileAPI.saveNewMainPic(file);
     if (response.data.resultCode === 0) {
         dispatch(saveNewMainPicSuccess(response.data.data.photos));
+        dispatch(setAuthUserPhoto(response.data.data.photos.small));
     }
 }
 

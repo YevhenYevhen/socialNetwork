@@ -16,7 +16,8 @@ const Profile = (props) => {
       <div className={classes.infoAndFriends}>
       <ProfileInfo saveProfile={props.saveProfile} isOwner={props.isOwner}
         profile={props.profile} status={props.status}
-        updateStatus={props.updateStatus} saveNewMainPic={props.saveNewMainPic} />
+        updateStatus={props.updateStatus} saveNewMainPic={props.saveNewMainPic}
+        />
       <Friends />
       </div>
       <MyPostsContainer/>

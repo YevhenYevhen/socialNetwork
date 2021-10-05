@@ -7,7 +7,6 @@ import { useEffect, useRef } from 'react';
 import locationIcon from './../../../assets/icons/location.png'
 
 const ProfileInfo = (props) => {
-
   const node = useRef()
   let [updatePictureMode, setUpdatePictureMode] = useState(false);
 

@@ -2,9 +2,8 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0 auto;
-    margin-top: 10px;
 }
 
 .user {
@@ -16,7 +15,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    margin: 10px 10px 10px 10px;
+    margin: 10px;
     background-color: white;
     border-radius: 8px;
 }

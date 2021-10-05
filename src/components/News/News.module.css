@@ -1,76 +1,106 @@
-
-.wrapper{
+.wrapper {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 30px 0 0 0;
-    background-color: #fff;
     height: 100%;
     width: 100%;
 }
 
-.preloader{
+.preloader {
     width: 100%;
 }
 
-.itemContainer{
-    width: 300px;
-    height: 350px;
-    margin: 15px;
+.itemContainer {
+    width: 320px;
+    min-height: 350px;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
 }
 
-.itemImage{
-    width: 100%;
+.itemImage {
+    width: 320px;
     height: 100%;
+    border-radius: 8px 8px 0 0;
 }
 
-.itemImageContainer{
-    width: 100%;
+.itemImageContainer {
+    width: 320px;
     height: 200px;
-    display: flex;
-    justify-content: center;
 }
 
-.itemTitle{
+.itemTitle {
     font-weight: 700;
-    font-style: 30px;
+    font-size: 15px;
     text-align: left;
-    width: 100%;
-    margin: 5px 0;
+    width: 300px;
+    margin: 8px;
 }
 
-.itemDescription{
-    width: 100%;
+.itemDescription {
+    width: 300px;
 }
 
-a{
+.itemContainer a {
     text-decoration: none;
     color: black;
+    max-width: 320px;
 }
 
-.readMore{
+.readMore {
     color: rgb(5, 85, 206);
-    margin: 5px 0;
+    margin: 8px 0;
 }
 
-
-@media (max-width:500px) {
-    .itemContainer{
-        width: 100%;
-        height: fit-content;
+@media (max-width: 1200px) {
+    .wrapper {
+        justify-content: center;
     }
-    
-    .itemImageContainer{
-        width: 100%;
+}
+
+@media (max-width: 500px) {
+    .itemImage {
+        width: 320px;
+        height: 100%;
+    }
+
+    .itemImageContainer {
+        width: 320px;
         height: 200px;
     }
-    
-    .itemDescription{
-        width: 100%;
-        height: fit-content;
+
+    .itemDescription {
+        width: 300px;
+    }
+}
+
+@media (max-width: 360px) {
+    .itemContainer {
+        width: 250px;
+    }
+
+    .itemImage {
+        width: 250px;
+        height: 150px;
+    }
+
+    .itemImageContainer {
+        width: 250px;
+        height: 150px;
+    }
+
+    .itemTitle {
+        width: 230px;
+        margin: 8px;
+    }
+
+    .itemDescription {
+        width: 230px;
+        font-size: 10px;
     }
 }

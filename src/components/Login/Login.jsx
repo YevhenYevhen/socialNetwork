@@ -86,9 +86,10 @@ export const Login = (props) => {
                         <div className={classes.buttonContainer}>
                             <button disabled={isFetching} className={isFetching ?
                                 classes.disabledButton
-                                : classes.submitButton} type="submit">Log in</button>
+                                : classes.submitButton} type="submit">{isFetching ?
+                                    <div className={classes.preloader}><Preloader /></div>
+                                    : <span>Log in</span>}</button>
                         </div>
-                        {isFetching && <Preloader />}
                         {error && <div className={classes.error}>{error}</div>}
                     </form>
                 )} />

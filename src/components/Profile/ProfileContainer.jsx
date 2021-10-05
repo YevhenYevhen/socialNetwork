@@ -44,24 +44,12 @@ class ProfileContainer extends React.Component {
 }
 
 
-
-
-
-
-
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
   authUserId: state.auth.userId,
 })
-/* 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
-let withUrlContainer = withRouter(AuthRedirectComponent);
-
-
-
-export default connect (mapStateToProps, {getUserProfile})(withUrlContainer); */
 
 export default compose(
   connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, saveNewMainPic, saveProfile }),
