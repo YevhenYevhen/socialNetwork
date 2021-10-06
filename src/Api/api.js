@@ -1,7 +1,5 @@
 import * as axios from 'axios';
 
-
-
 const instance = axios.create({
     withCredentials: true,
     headers: {
@@ -9,7 +7,9 @@ const instance = axios.create({
     },
     baseURL: 'https://social-network.samuraijs.com/api/1.0/'
 })
-
+const news = axios.create({
+    baseURL: 'https://api.currentsapi.services/v1/'
+})
 
 
 
@@ -56,8 +56,6 @@ export const profileAPI = {
     }
 }
 
-
-
 export const authAPI = {
     me() {
         return instance.get(`auth/me`)
@@ -70,23 +68,12 @@ export const authAPI = {
     }
 }
 
-
-
-
-
 export const securityAPI = {
     getCaptcha() {
         return instance.get(`security/get-captcha-url`)
     }
 }
 
-
-
-
-
-const news = axios.create({
-    baseURL: 'https://api.currentsapi.services/v1/'
-})
 
 
 export const newsAPI = {
@@ -97,5 +84,4 @@ export const newsAPI = {
         return news.get(`search?page_number=${pageNumber}&apiKey=9n6IQGitws7rrEQJwB8qTHhuuXPp87quwmxrY8Kgwi-W8Wgf`)
     }
 }
-
 

@@ -8,27 +8,26 @@ const NewsInfiniteScroll = () => {
     const [news, setNews] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
 
-    useEffect( () => {
+    useEffect(() => {
         const getNews = async () => {
             if (pageNumber === 1) {
                 setIsFetching(true)
-                let response = await newsAPI.getNews();
+                let response = await newsAPI.getNews()
                 setNews(response.data.news)
                 setIsFetching(false)
             } else {
                 setIsFetching(true)
-                let response = await newsAPI.getOlderNews(pageNumber);
-                setNews([...news, ...response.data.news])
-                alert(news.length)
+                let response = await newsAPI.getOlderNews(pageNumber)
+                setNews(news => [...news, ...response.data.news])
                 setIsFetching(false)
             }
         }
         getNews();
     }, [pageNumber])
 
-    
+
     const observer = useRef()
-    const lastUserElementRef = useCallback(node => {
+    const lastItemElementRef = useCallback(node => {
         if (isFetching) return
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
@@ -40,7 +39,7 @@ const NewsInfiniteScroll = () => {
     }, [isFetching])
 
 
-    return <News isFetching={isFetching} news={news} lastUserElementRef={lastUserElementRef} />
+    return <News isFetching={isFetching} news={news} lastItemElementRef={lastItemElementRef} />
 }
 
 export default withAuthRedirect(NewsInfiniteScroll);
