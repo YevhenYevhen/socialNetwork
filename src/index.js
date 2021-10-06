@@ -10,14 +10,14 @@ import ScrollToTop from './components/Common/ScrollToTop';
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <HashRouter>
       <Provider store={store}>
         <ScrollToTop />
         <App/>
       </Provider>
-    </HashRouter>
-  </React.StrictMode>,
+    </HashRouter>,
+  //</React.StrictMode>,
   document.getElementById('root')
 );
 

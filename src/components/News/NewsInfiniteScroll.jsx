@@ -6,32 +6,27 @@ import News from './News'
 const NewsInfiniteScroll = () => {
     const [isFetching, setIsFetching] = useState(false)
     const [news, setNews] = useState([])
-    const [pageNumber, setPageNumber] = useState(0)
+    const [pageNumber, setPageNumber] = useState(1)
 
     useEffect( () => {
         const getNews = async () => {
-            setIsFetching(true)
-            let response = await newsAPI.getNews();
-            setNews([response.data.news])
-            setIsFetching(false)
-        }
-        getNews();
-    }, [])
-
-    useEffect( () => {
-        const getOlderNews = async () => {
-            if (pageNumber > 0) {
+            if (pageNumber === 1) {
+                setIsFetching(true)
+                let response = await newsAPI.getNews();
+                setNews(response.data.news)
+                setIsFetching(false)
+            } else {
                 setIsFetching(true)
                 let response = await newsAPI.getOlderNews(pageNumber);
-                setNews(news => [...news, response.data.news])
+                setNews([...news, ...response.data.news])
+                alert(news.length)
                 setIsFetching(false)
             }
         }
-        getOlderNews();
+        getNews();
     }, [pageNumber])
 
-
-
+    
     const observer = useRef()
     const lastUserElementRef = useCallback(node => {
         if (isFetching) return

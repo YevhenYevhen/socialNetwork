@@ -2,7 +2,6 @@ import * as axios from 'axios';
 
 
 
-
 const instance = axios.create({
     withCredentials: true,
     headers: {
@@ -82,6 +81,9 @@ export const securityAPI = {
 }
 
 
+
+
+
 const news = axios.create({
     baseURL: 'https://api.currentsapi.services/v1/'
 })
@@ -97,8 +99,3 @@ export const newsAPI = {
 }
 
 
-
-/* export const getUsers = (currentPage = 1, pageSize = 40) => {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
-} */
-//ADDED THIS ONE TO THE USERSAPI OBJECT TO MAKE IT COMPACT

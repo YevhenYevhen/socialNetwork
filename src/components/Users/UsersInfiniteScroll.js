@@ -35,8 +35,6 @@ function UsersInfiniteScroll(props) {
     if (node) observer.current.observe(node)
   }, [props.isFetching, hasMore])
 
-
-
   return (
 
     <User users={props.users}
