@@ -6,35 +6,34 @@
     border-radius: 8px;
     border: 1px solid rgb(196, 196, 196);
     width: 50%;
-    flex-grow: 1;
-    margin: 0 20px 0 0;
+    height: fit-content;
 }
 
 .fullName {
     padding: 10px;
     text-transform: uppercase;
     color: black;
-    font-weight: 700;
+    font-weight: 300;
     text-align: left;
     width: 100%;
 }
 
-.statusContainer {
+.status {
+    display: flex;
+    justify-content: left;
     cursor: pointer;
     width: 100%;
-    height: fit-content;
+    overflow: hidden;
     text-align: left;
     padding: 10px;
     font-size: 25px;
-    overflow: hidden;
 }
-
 
 .nameAndStatus {
     display: flex;
     flex-wrap: wrap;
     height: fit-content;
-    width: 250px;
+    width: 50%;
     font-size: 30px;
 }
 
@@ -47,34 +46,39 @@
 /*======================================================MAIN PHOTO========================================================*/
 
 .mainPhoto {
+    height: fit-content;
+    width: 200px;
+    margin-top: -100px;
+    outline: 4px solid rgba(239, 239, 239);
+    border-radius: 50%;
+}
+
+.ownerMainPhoto {
     width: 200px;
     height: 200px;
+    margin-top: -100px;
     border-radius: 50%;
     transition: filter 200ms ease-in-out;
 }
 
-
-.mainPhotoContainer {
-    height: 200px;
-    width: 200px;
-    margin: -140px 0 0 20px;
-    border: 4px solid rgba(239, 239, 239);
-    border-radius: 50%;
-}
-
-.ownerMainPhotoContainer {
-    height: 200px;
-    width: 200px;
-    margin: -140px 0 0 20px;
-    border: 4px solid rgba(239, 239, 239);
-    border-radius: 50%;
-}
-
-.ownerMainPhotoContainer:hover {
+.ownerMainPhoto:hover {
     transition-property: filter;
-    border: 4px solid rgba(0, 0, 0, 0.521);
+    outline: 6px solid rgba(0, 0, 0, 0.521);
     cursor: pointer;
     filter: brightness(0.7);
+}
+
+.ownerMainPhoto:active {
+    outline: 1px solid rgba(0, 0, 0, 0.459);
+}
+
+.mainPhotoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    height: 150px;
+    margin: 15px;
 }
 
 .uploadPhotoLabelContainer {
@@ -164,17 +168,17 @@ label:hover {
 
 /*======================================================USER INFROMATION==================================================*/
 
-@media (max-width: 1170px) {
+@media (max-width: 1130px) {
     .wrapper {
         width: 100%;
         justify-content: space-evenly;
         height: fit-content;
-        margin: 0;
     }
     .fullName {
         text-align: left;
     }
-    .status {
+    .status div {
+        width: 100%;
         text-align: left;
     }
     .nameAndStatus {
@@ -183,28 +187,29 @@ label:hover {
     .info {
         width: 30%;
     }
-    .contactsContainer img {
-        width: 20px;
-        height: 20px;
+    .mainPhoto {
+        outline: none;
     }
-    .contactsContainer img:hover {
-        width: 30px;
-        height: 30px;
+    .ownerMainPhoto:hover {
+        outline: none;
     }
-    .iconContainer {
-        width: 30px;
-    }
-    .contactsContainer {
-        width: 80%;
+    .ownerMainPhoto:active {
+        outline: none;
     }
 }
 
 @media (max-width: 890px) {
-    .ownerMainPhotoContainer,
-    .mainPhotoContainer {
-        margin: -100px auto 40px;
+    .ownerMainPhoto,
+    .mainPhoto {
+        width: 200px;
+        height: 200px;
+        margin: 30px auto;
     }
-
+    .mainPhotoContainer {
+        margin: -100px auto 0;
+        width: 100%;
+        height: 300px;
+    }
     .uploadPhotoLabelContainer {
         margin: 0px;
     }
@@ -217,7 +222,9 @@ label:hover {
         width: 100%;
         text-align: center;
     }
-    .status {
+    .status div {
+        font-size: 35px;
+        width: 100%;
         text-align: center;
     }
     .location {
@@ -229,7 +236,11 @@ label:hover {
     }
     .aboutMe {
         font-size: 30px;
-    } 
+    }
+
+    .contacts {
+        width: 100%;
+    }
     .info {
         width: 100%;
     }
@@ -237,17 +248,18 @@ label:hover {
 
 @media (max-width: 450px) {
     .ownerMainPhoto,
-    .mainPhoto,
-    .ownerMainPhotoContainer,
-    .mainPhotoContainer {
+    .mainPhoto {
         width: 190px;
         height: 190px;
+        margin: 10px auto;
     }
-
+    .mainPhotoContainer {
+        height: 240px;
+    }
     .fullName {
         font-size: 25px;
     }
-    .status {
+    .status div {
         font-size: 20px;
     }
     .location {
@@ -260,17 +272,16 @@ label:hover {
     .aboutMe {
         font-size: 20px;
     }
-    .contactsContainer {
-        width: 60%;
-    }
     .contactsContainer img {
         width: 20px;
         height: 20px;
     }
+
     .contactsContainer img:hover {
         width: 30px;
         height: 30px;
     }
+
     .iconContainer {
         width: 30px;
     }

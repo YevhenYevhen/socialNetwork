@@ -12,7 +12,7 @@ const ProfileDataForm = (props) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setSavingSuccess(false)
-        }, 3000)
+        }, 1000)
         return () => clearTimeout(timer)
     }, [savingSuccess])
 

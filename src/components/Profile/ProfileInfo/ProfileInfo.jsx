@@ -51,9 +51,8 @@ const ProfileInfo = (props) => {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.mainPhotoContainer}>
-        <img onClick={onPictureClick}
-          className={props.isOwner ? classes.ownerMainPhoto : classes.mainPhoto}
+      <div className={props.isOwner ? classes.ownerMainPhotoContainer : classes.mainPhotoContainer}>
+        <img onClick={onPictureClick} className={classes.mainPhoto}
           src={props.profile.photos.large || userPic} alt='' />
 
         {props.isOwner && updatePictureMode &&
@@ -69,7 +68,7 @@ const ProfileInfo = (props) => {
         <div className={classes.fullName}>
           {props.profile.fullName}
         </div>
-        <div className={classes.status}>
+        <div className={classes.statusContainer}>
           <ProfileStatusWithHooks status={props.status}
             updateStatus={props.updateStatus} isOwner={props.isOwner} />
         </div>

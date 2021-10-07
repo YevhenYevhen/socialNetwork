@@ -8,7 +8,7 @@
 }
 
 .title{
-    font-size: 20px;
+    font-size: 30px;
     margin: 10px 0 0 40px;
 }
 /*=============================================FRIEND=================================================================*/
@@ -34,12 +34,13 @@
 
 .friendName{
     text-align: center;
+    font-size: 25px;
 }
 
 /*=============================================FRIEND=================================================================*/
 
 
-@media (max-width:1130px) {
+@media (max-width:1170px) {
     .wrapper{
         width: 100%;
         margin: 20px 0 0 0;
@@ -146,4 +147,8 @@
         width: 70px;
         padding: 0 0 10px 0;
     }
+    .friendName{
+        font-size: 15px;
+    }
+    
 }

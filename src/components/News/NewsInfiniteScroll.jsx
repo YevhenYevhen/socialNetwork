@@ -25,7 +25,6 @@ const NewsInfiniteScroll = () => {
         getNews();
     }, [pageNumber])
 
-
     const observer = useRef()
     const lastItemElementRef = useCallback(node => {
         if (isFetching) return
