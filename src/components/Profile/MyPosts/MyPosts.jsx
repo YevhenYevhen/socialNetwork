@@ -8,7 +8,8 @@ const MyPosts = (props) => {
 
   let postsElements = props.postsData.slice().reverse()
     .map((post) => <Post key={post.id} authUserPhoto={props.authUserPhoto}
-      message={post.message} isLiked={post.isLiked} likeDislikePost={props.likeDislikePost} postId={post.id} />);
+      message={post.message} isLiked={post.isLiked} likeDislikePost={props.likeDislikePost}
+      postId={post.id} deletePost={props.deletePost} />);
 
   return (
     <>
