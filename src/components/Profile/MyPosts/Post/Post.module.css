@@ -13,28 +13,45 @@
     margin: 10px;
 }
 
-.likeButton {
+.likeButton, .dislikeButton  {
     margin: 10px;
-    width: 50px;
+    width: 80px;
     border-radius: 8px;
-    padding: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    cursor: pointer;
 }
 
-.likeButton:hover {
+.likeButton {
+    background-color: rgb(5, 85, 206);
+    color: #fff;
+}
+.dislikeButton{
+    background-color: rgb(219, 219, 219);
+}
+
+.likeButton:hover, .dislikeButton:hover {
     filter: brightness(1.2);
 }
 
-.likeIcon {
-    width: 15px;
-    height: 15px;
+.likeIcon, .dislikeIcon {
+    width: 20px;
+    height: 20px;
 }
 
+.dislikeIcon{
+    transform: scaleY(-1);
+}
+.likeIcon{
+    filter: invert(100%);
+}
 .message {
     font-size: 20px;
     color: #000;
     margin: 10px;
     max-width: 100%;
 }
+
+
+

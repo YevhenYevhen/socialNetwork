@@ -4,15 +4,16 @@ import likeIcon from '../../../../assets/icons/like.png'
 import userPic from '../../../../assets/images/user.png'
 
 
-const Post = (props) => {
+const Post = ({authUserPhoto, message, postId, isLiked, likeDislikePost}) => {
   return (
     <div className={classes.item}>
-      <img className={classes.userPhoto} src={props.authUserPhoto || userPic} alt="" />
-      <div className={classes.message}>{props.message}</div>
+      <img className={classes.userPhoto} src={authUserPhoto || userPic} alt="" />
+      <div className={classes.message}>{message}</div>
       <div>
-        <button className={classes.likeButton}>
-          <img className={classes.likeIcon} src={likeIcon} alt="" />
-          <span>{props.likes}</span>
+        <button onClick={() => likeDislikePost(postId)}
+          className={isLiked ? classes.dislikeButton : classes.likeButton}>
+           <span>{isLiked ? 'Dislike' : 'Like'}</span>
+          <img className={isLiked ? classes.dislikeIcon : classes.likeIcon} src={likeIcon} alt="" />
         </button>
       </div>
     </div>

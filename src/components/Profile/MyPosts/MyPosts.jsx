@@ -6,9 +6,9 @@ import PostInputContainer from './PostInput';
 
 const MyPosts = (props) => {
 
-  let postsElements = props.postsData
+  let postsElements = props.postsData.slice().reverse()
     .map((post) => <Post key={post.id} authUserPhoto={props.authUserPhoto}
-      message={post.message} likes={post.likesCounter} />);
+      message={post.message} isLiked={post.isLiked} likeDislikePost={props.likeDislikePost} postId={post.id} />);
 
   return (
     <>
@@ -19,7 +19,7 @@ const MyPosts = (props) => {
         <PostInputContainer />
       </div>
       <div className={classes.posts}>
-        {postsElements.reverse()}
+        {postsElements}
       </div>
     </>
   );

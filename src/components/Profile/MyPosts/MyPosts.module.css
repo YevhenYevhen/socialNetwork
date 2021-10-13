@@ -21,14 +21,15 @@
 
 .submitButton {
     background-color: rgb(5, 85, 206);
+    color: #fff;
+    margin: 10px 0 0;
+    width: 80px;
+    height: 25px;
     border-radius: 8px;
-    padding: 5px;
-    margin: 10px 0 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    width: 50px;
+    cursor: pointer;
 }
 
 .submitButton:hover {

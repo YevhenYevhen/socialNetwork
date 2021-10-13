@@ -5,13 +5,15 @@ const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_STATUS = 'profile/SET-USER-STATUS';
 const DELETE_POST = 'profile/DELETE-POST';
 const SAVE_NEW_MAIN_PIC_SUCCESS = 'profile/SAVE-NEW-MAIN-PIC-SUCCESS';
+const LIKE_DISLIKE_POST = 'profile/LIKE-DISLIKE-POST';
+
 
 
 let initialState = {
     postsData: [
-        { id: 1, message: 'This is my first post!', likesCounter: 12 },
-        { id: 2, message: 'This is crazy!', likesCounter: 34 },
-        { id: 6, message: 'I am so excited', likesCounter: 0 }
+        { id: 1, message: 'This is my first post!', isLiked: false},
+        { id: 2, message: 'This is crazy!', isLiked: false },
+        { id: 3, message: 'I am so excited', isLiked: false }
     ],
     friends: [
         { id: 1, name: 'Ross', photo: 'https://data.whicdn.com/images/353451774/original.jpg' },
@@ -30,9 +32,9 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 4,
+                id: action.postId,
                 message: action.newPostData,
-                likesCounter: 0
+                isLiked: false
             };
             return {
                 ...state,
@@ -54,6 +56,17 @@ const profileReducer = (state = initialState, action) => {
                 ...state, postsData: state.postsData.filter(p => p.id !== action.postId)
             };
         }
+        case LIKE_DISLIKE_POST: {
+            return {
+                ...state,
+                postsData: state.postsData.map(p => {
+                    if (p.id === action.postId) {
+                        return {...p, isLiked: !p.isLiked}
+                    }
+                    return p;
+                })
+            };
+        }
         case SAVE_NEW_MAIN_PIC_SUCCESS: {
             return {
                 ...state, profile: { ...state.profile, photos: action.photos }
@@ -65,11 +78,14 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
-export const addPostActionCreator = (postData) => ({ type: ADD_POST, newPostData: postData })
+export const addPostActionCreator = (postData, postId) => ({ type: ADD_POST, newPostData: postData, postId})
 export const deletePost = (postId) => ({ type: DELETE_POST, postId: postId })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 export const saveNewMainPicSuccess = (photos) => ({ type: SAVE_NEW_MAIN_PIC_SUCCESS, photos })
+export const likeDislikePost = (postId) => ({ type: LIKE_DISLIKE_POST, postId })
+
+
 
 
 

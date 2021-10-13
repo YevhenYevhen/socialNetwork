@@ -1,6 +1,7 @@
 
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
+import { likeDislikePost } from '../../../redux/profileReducer';
 
 
 let mapStateToProps = (state) => {
@@ -10,7 +11,7 @@ let mapStateToProps = (state) => {
   }
 }
 
-let MyPostsContainer = connect(mapStateToProps, null)(MyPosts); 
+let MyPostsContainer = connect(mapStateToProps, { likeDislikePost })(MyPosts);
 
 
 export default MyPostsContainer;

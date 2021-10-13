@@ -206,7 +206,7 @@ label:hover {
     }
 
     .uploadPhotoLabelContainer {
-        margin: 0px;
+        margin: 10px 0px 0px;
     }
 
     .nameAndStatus {
@@ -232,6 +232,17 @@ label:hover {
     } 
     .info {
         width: 100%;
+    }
+    .contactsContainer img {
+        width: 40px;
+        height: 40px;
+    }
+    .contactsContainer img:hover {
+        width: 45px;
+        height: 45px;
+    }
+    .iconContainer {
+        width: 50px;
     }
 }
 
@@ -261,17 +272,17 @@ label:hover {
         font-size: 20px;
     }
     .contactsContainer {
-        width: 60%;
+        width: 100%;
     }
     .contactsContainer img {
         width: 20px;
         height: 20px;
     }
     .contactsContainer img:hover {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
     .iconContainer {
-        width: 30px;
+        width: 40px;
     }
 }
