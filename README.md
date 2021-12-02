@@ -1,7 +1,7 @@
 
 
 ### Social Network
-## An educational React & Redux SPA  
+## React & Redux SPA  
 - Class components with life-cycle methods
 - Function components with Hooks
  (useState, useEffect, useRef, useCallback)
